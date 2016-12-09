@@ -41,8 +41,7 @@ public class LoginDAO {
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
 				user = new Dbuser();
-				user.setU_id(rs.getString("u_id"));
-				user.setU_pwd(rs.getString("u_pwd"));//这里添加需要的属性
+				user.setAll(rs);
 				loginUserList.add(0, this.user);
 			}
 			if(user == null) {

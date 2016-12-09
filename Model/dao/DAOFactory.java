@@ -24,4 +24,8 @@ public class DAOFactory {
 	static public UserInfoDAO getUserInfoDAO() {
 		return new UserInfoDAO();
 	}
+	
+	static public SearchQnDAO getSearchQnDAO() {
+		return new SearchQnDAO();
+	}
 }

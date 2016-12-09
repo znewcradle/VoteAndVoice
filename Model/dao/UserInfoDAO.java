@@ -39,19 +39,7 @@ public class UserInfoDAO {
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
 				Dbuser user = new Dbuser();
-				user.setU_id(rs.getString("u_id"));
-				user.setU_pwd(rs.getString("u_pwd"));
-				user.setV_exp(rs.getBigDecimal("v_exp"));
-				user.setV_level(rs.getBigDecimal("v_level"));
-				user.setV_coin(rs.getBigDecimal("v_coin"));
-				user.setU_validity(rs.getString("u_validity"));
-				user.setU_name(rs.getString("u_name"));
-				user.setU_gender(rs.getString("u_gender"));
-				user.setU_phone(rs.getString("u_phone"));
-				user.setU_ad_country(rs.getString("u_ad_country"));
-				user.setU_ad_province(rs.getString("u_ad_province"));
-				user.setU_ad_city(rs.getString("u_ad_city"));
-				user.setU_ad_street(rs.getString("u_ad_street"));
+				user.setAll(rs);
 				userList.add(user);
 				message = SUCCESS;
 			}

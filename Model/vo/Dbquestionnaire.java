@@ -1,6 +1,8 @@
 package vo;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 public class Dbquestionnaire {
@@ -115,4 +117,22 @@ public class Dbquestionnaire {
 		this.qn_a_count = qn_a_count;
 	}
 	
+	public void setAll(ResultSet rs) throws SQLException{
+		try {
+			this.setQn_id(rs.getString("qn_id"));
+			this.setS_id(rs.getString("s_id"));
+			this.setQn_title(rs.getString("qn_title"));
+			this.setQn_des(rs.getString("qn_des"));
+			this.setQn_type(rs.getString("qn_type"));
+			this.setQn_tag(rs.getString("qn_tag"));
+			this.setQn_state(rs.getString("qn_state"));
+			this.setQn_validity(rs.getString("qn_validity"));
+			this.setQn_q_count(rs.getBigDecimal("qn_q_count"));
+			this.setQn_a_count(rs.getBigDecimal("qn_a_count"));
+			this.setQn_starttime(rs.getTimestamp("qn_starttime"));
+			this.setQn_endtime(rs.getTimestamp("qn_endtime"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
