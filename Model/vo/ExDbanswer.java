@@ -49,4 +49,19 @@ public class ExDbanswer {
 			e.printStackTrace();
 		}
 	}
+	public void setPart(ResultSet rs) throws SQLException{
+		try {
+			this.getAnswer().setAll(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void setPartU(ResultSet rs) throws SQLException{
+		try {
+			this.getAnswer().setAll(rs);
+			this.setU_name(rs.getString("u_name"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
