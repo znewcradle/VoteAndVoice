@@ -1,6 +1,8 @@
 package vo;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Dbitem {
 	
@@ -50,4 +52,15 @@ public class Dbitem {
 		this.i_des = i_des;
 	}
 
+	public void setAll(ResultSet rs) throws SQLException{
+		try {
+			this.setQn_id(rs.getString("qn_id"));
+			this.setQ_id(rs.getBigDecimal("q_id"));
+			this.setI_id(rs.getBigDecimal("i_id"));
+			this.setI_type(rs.getString("i_type"));
+			this.setI_des(rs.getString("i_des"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -11,9 +11,9 @@ public class ATest {
 		ArrayList<Dbuser> friendsList = new ArrayList<Dbuser>();
 		//result = DAOFactory.getFollowDAO().getFriends("zhz123", friendsList);
 		//result = DAOFactory.getFollowDAO().getFollowedUser("zhz123", friendsList);
-		//result = DAOFactory.getFollowDAO().getFollowingUser("zhz123", friendsList);
+		result = DAOFactory.getFollowDAO().getFollowingUser("zhz123", friendsList);
 		//result = DAOFactory.getFollowDAO().follow("zhz123", "yyf123");
-		result = DAOFactory.getFollowDAO().unfollow("zhz123", "yyf123");
+		//result = DAOFactory.getFollowDAO().unfollow("zhz123", "yyf123");
 		System.out.println(result);
 		System.out.println("size:\t" + friendsList.size());
 		for(int i = 0; i != friendsList.size(); i++) {
@@ -29,17 +29,17 @@ public class ATest {
 		
 		//NewsDAO
 		/*int result;
-		//ArrayList<Dbanswer> list = new ArrayList<Dbanswer>();
-		//result = DAOFactory.getNewsDAO().getAnswersByUId("guest0000", list);
+		ArrayList<Dbanswer> list = new ArrayList<Dbanswer>();
+		result = DAOFactory.getNewsDAO().getAnswersByUId("guest0000", list);
 		//ArrayList<ExDbanswer> list = new ArrayList<ExDbanswer>();
-		//result = DAOFactory.getNewsDAO().getExAnswersByUId("guest0000", list);
+		//result = DAOFactory.getNewsDAO().getExAnswersByUId("yyf123", list);
 		//ArrayList<Dbquestionnaire> list = new ArrayList<Dbquestionnaire>();
-		//result = DAOFactory.getNewsDAO().getQuestionnairesByUId("zhz123", list);
-		ArrayList<ExDbquestionnaire> list = new ArrayList<ExDbquestionnaire>();
-		result = DAOFactory.getNewsDAO().getExQuestionnairesByUId("zhz123", list);
+		//result = DAOFactory.getNewsDAO().getQuestionnairesByUId("yyf123", list);
+		//ArrayList<ExDbquestionnaire> list = new ArrayList<ExDbquestionnaire>();
+		//result = DAOFactory.getNewsDAO().getExQuestionnairesByUId("zhz123", list);
 		System.out.println(result + "\nsize:\t" + list.size());
 		for(int i = 0; i != list.size(); i++) {
-			System.out.println(list.get(0).getQuestionnaire().getQn_a_count() + list.get(0).getQuestionnaire().getQn_title());
+			System.out.println(list.get(0).getA_content() + list.get(0).getA_timestamp());
 		}*/
 		
 		//RegisterDAO
@@ -61,5 +61,17 @@ public class ATest {
 		userList.get(0).setU_ad_city("…œ∫£");;
 		result = DAOFactory.getUserInfoDAO().changeUserInfo(userList.get(0));
 		System.out.println(result);*/
+		
+		//SearchQnDAO
+		/*int result;
+		//ArrayList<ExDbquestionnaire> list = new ArrayList<ExDbquestionnaire>();
+		//result = DAOFactory.getSearchQnDAO().getExQnsByQnTitle("ti", list);
+		//result = DAOFactory.getSearchQnDAO().getExQnsByQnTitleByQnTypeOrTag("ACG", list);
+		ArrayList<ExDbquestion> list = new ArrayList<ExDbquestion>();
+		result = DAOFactory.getSearchQnDAO().getExQByAStem(" «", list);
+		System.out.println(result + "\nsize:\t" + list.size());
+		for(int i = 0; i != list.size(); i++) {
+			System.out.println(list.get(i).getQn_title() + list.get(i).getQuestion().getQ_stem());
+		}*/
 	}
 }

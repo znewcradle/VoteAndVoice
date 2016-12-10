@@ -1,6 +1,8 @@
 package vo;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Dbuser {
 	
@@ -122,4 +124,23 @@ public class Dbuser {
 		this.u_ad_street = u_ad_street;
 	}
 
+	public void setAll(ResultSet rs) throws SQLException{
+		try {
+			this.setU_id(rs.getString("u_id"));
+			this.setU_pwd(rs.getString("u_pwd"));
+			this.setV_exp(rs.getBigDecimal("v_exp"));
+			this.setV_level(rs.getBigDecimal("v_level"));
+			this.setV_coin(rs.getBigDecimal("v_coin"));
+			this.setU_validity(rs.getString("u_validity"));
+			this.setU_name(rs.getString("u_name"));
+			this.setU_gender(rs.getString("u_gender"));
+			this.setU_phone(rs.getString("u_phone"));
+			this.setU_ad_country(rs.getString("u_ad_country"));
+			this.setU_ad_province(rs.getString("u_ad_province"));
+			this.setU_ad_city(rs.getString("u_ad_city"));
+			this.setU_ad_street(rs.getString("u_ad_street"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

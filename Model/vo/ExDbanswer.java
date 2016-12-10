@@ -1,5 +1,8 @@
 package vo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class ExDbanswer {
 	private Dbanswer answer = new Dbanswer();
 	private String u_name;
@@ -35,4 +38,30 @@ public class ExDbanswer {
 		this.i_des = i_des;
 	}
 	
+	public void setAll(ResultSet rs) throws SQLException{
+		try {
+			this.getAnswer().setAll(rs);
+			this.setU_name(rs.getString("u_name"));
+			this.setQn_title(rs.getString("qn_title"));
+			this.setQ_stem(rs.getString("q_stem"));
+			this.setI_des(rs.getString("i_des"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void setPart(ResultSet rs) throws SQLException{
+		try {
+			this.getAnswer().setAll(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void setPartU(ResultSet rs) throws SQLException{
+		try {
+			this.getAnswer().setAll(rs);
+			this.setU_name(rs.getString("u_name"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
