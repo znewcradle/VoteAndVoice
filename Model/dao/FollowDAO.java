@@ -41,8 +41,7 @@ public class FollowDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Dbuser user = new Dbuser();
-				user.setU_id(rs.getString("u_id"));
-				user.setU_name(rs.getString("u_name"));//这里添加需要的属性
+				user.setAll(rs);
 				friendsList.add(user);
 			}
 			message = SUCCESS;
