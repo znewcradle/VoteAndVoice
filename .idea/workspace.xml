@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc77ec49-2024-4144-baef-21b84938701d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/WebContent/style/type.css" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/fill.html" afterPath="$PROJECT_DIR$/WebContent/fill.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/questionlist.html" afterPath="$PROJECT_DIR$/WebContent/questionlist.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/search.html" afterPath="$PROJECT_DIR$/WebContent/search.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/style/index.css" afterPath="$PROJECT_DIR$/WebContent/style/index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/WebContent/style/search.css" afterPath="$PROJECT_DIR$/WebContent/style/search.css" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -554,7 +548,7 @@
       <workItem from="1481269420403" duration="19000" />
       <workItem from="1481269842977" duration="19402000" />
       <workItem from="1481337952785" duration="9342000" />
-      <workItem from="1481350020846" duration="9111000" />
+      <workItem from="1481350020846" duration="9170000" />
     </task>
     <task id="LOCAL-00001" summary="加粗关键字">
       <created>1481270824086</created>
@@ -584,11 +578,18 @@
       <option name="project" value="LOCAL" />
       <updated>1481340169372</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="更换模板，完善条件筛选栏">
+      <created>1481359194316</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1481359194316</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38041000" />
+    <option name="totallyTimeSpent" value="38100000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-13" y="-13" width="2906" height="1754" extended-state="6" />
@@ -625,7 +626,8 @@
     <MESSAGE value="回答问卷html，已有三种问题模板，还需要js来添加问题" />
     <MESSAGE value="填问卷html" />
     <MESSAGE value="问题列表html，以及对应css" />
-    <option name="LAST_COMMIT_MESSAGE" value="问题列表html，以及对应css" />
+    <MESSAGE value="更换模板，完善条件筛选栏" />
+    <option name="LAST_COMMIT_MESSAGE" value="更换模板，完善条件筛选栏" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
