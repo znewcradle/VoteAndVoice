@@ -1,6 +1,8 @@
 package vo;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Dbquestion {
 	
@@ -9,7 +11,7 @@ public class Dbquestion {
 	private String q_type;
 	private String q_stem;
 	private String q_des;
-	private BigDecimal q_item_count;
+	private BigDecimal q_i_count;
 	
 	public String getQn_id() {
 		return qn_id;
@@ -51,12 +53,24 @@ public class Dbquestion {
 		this.q_des = q_des;
 	}
 	
-	public BigDecimal getQ_item_count() {
-		return q_item_count;
+	public BigDecimal getQ_i_count() {
+		return q_i_count;
 	}
 	
-	public void setQ_item_count(BigDecimal q_item_count) {
-		this.q_item_count = q_item_count;
+	public void setQ_i_count(BigDecimal q_i_count) {
+		this.q_i_count = q_i_count;
 	}
 	
+	public void setAll(ResultSet rs) throws SQLException{
+		try {
+			this.setQn_id(rs.getString("qn_id"));
+			this.setQn_id("qn_id");
+			this.setQ_type("q_type");
+			this.setQ_stem(rs.getString("q_stem"));
+			this.setQ_des(rs.getString("q_des"));
+			this.setQ_i_count(rs.getBigDecimal("q_i_count"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

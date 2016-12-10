@@ -1,6 +1,8 @@
 package vo;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
 public class Dbanswer {
@@ -60,4 +62,16 @@ public class Dbanswer {
 		this.a_content = a_content;
 	}
 
+	public void setAll(ResultSet rs) throws SQLException{
+		try {
+			this.setU_id(rs.getString("u_id"));
+			this.setQn_id(rs.getString("qn_id"));
+			this.setQ_id(rs.getBigDecimal("q_id"));
+			this.setI_id(rs.getBigDecimal("i_id"));
+			this.setA_timestamp(rs.getTimestamp("a_timestamp"));
+			this.setA_content(rs.getString("a_content"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

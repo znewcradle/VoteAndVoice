@@ -1,5 +1,8 @@
 package vo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Dbfollow {
 	
 	private String following_u_id;
@@ -19,6 +22,14 @@ public class Dbfollow {
 	
 	public void setFollowed_u_id(String followed_u_id) {
 		this.followed_u_id = followed_u_id;
-	}	
-
+	}
+	
+	public void setAll(ResultSet rs) throws SQLException{
+		try {
+			this.setFollowing_u_id(rs.getString("following_u_id"));
+			this.setFollowed_u_id(rs.getString("followed_u_id"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
