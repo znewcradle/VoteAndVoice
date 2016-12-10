@@ -47,6 +47,7 @@ public class NewsDAO {
 				questionnaire.setQn_title(rs.getString("qn_title"));
 				questionnaire.setQn_des(rs.getString("qn_des"));
 				questionnaire.setQn_type(rs.getString("qn_type"));
+				questionnaire.setQn_tag(rs.getString("qn_tag"));
 				questionnaire.setQn_state(rs.getString("qn_state"));
 				questionnaire.setQn_validity(rs.getString("qn_validity"));
 				questionnaire.setQn_q_count(rs.getBigDecimal("qn_q_count"));
@@ -90,6 +91,7 @@ public class NewsDAO {
 				exQuestionnaire.getQuestionnaire().setQn_title(rs.getString("qn_title"));
 				exQuestionnaire.getQuestionnaire().setQn_des(rs.getString("qn_des"));
 				exQuestionnaire.getQuestionnaire().setQn_type(rs.getString("qn_type"));
+				exQuestionnaire.getQuestionnaire().setQn_tag(rs.getString("qn_tag"));
 				exQuestionnaire.getQuestionnaire().setQn_state(rs.getString("qn_state"));
 				exQuestionnaire.getQuestionnaire().setQn_validity(rs.getString("qn_validity"));
 				exQuestionnaire.getQuestionnaire().setQn_q_count(rs.getBigDecimal("qn_q_count"));
