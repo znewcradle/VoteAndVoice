@@ -6,9 +6,11 @@ import java.util.ArrayList;
 
 public class ExDbitem {
 	private Dbitem item = new Dbitem();
-	private String qn_title;
-	private String q_stem;
+	private String qn_title = "";
+	private String q_stem = "";
 	private ArrayList<ExDbanswer> exAnswerList = null;
+	
+	//no translation
 	
 	public Dbitem getItem() {
 		return item;
@@ -47,5 +49,19 @@ public class ExDbitem {
 			exAnswerList = new ArrayList<ExDbanswer>();
 		}
 		return exAnswerList;
+	}
+	
+	//translation
+	public String get_transQn_title() {
+		return qn_title;
+	}
+	public void set_transQn_title(String qn_title) {
+		this.qn_title = qn_title;
+	}
+	public String get_transQ_stem() {
+		return q_stem;
+	}
+	public void set_transQ_stem(String q_stem) {
+		this.q_stem = q_stem;
 	}
 }

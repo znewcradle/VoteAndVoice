@@ -6,8 +6,10 @@ import java.util.ArrayList;
 
 public class ExDbquestionnaire {
 	private Dbquestionnaire questionnaire = new Dbquestionnaire();
-	private String s_name;
+	private String s_name = "";
 	private ArrayList<ExDbquestion> exQuestionList = null;
+	
+	//no translation
 	
 	public Dbquestionnaire getQuestionnaire() {
 		return questionnaire;
@@ -40,4 +42,12 @@ public class ExDbquestionnaire {
 		}
 		return exQuestionList;
 	}
+	
+	//translation
+	public String get_transS_name() {
+		return s_name;
+	}
+	public void set_transS_name(String s_name) {
+		this.s_name = s_name;
+	}	
 }
