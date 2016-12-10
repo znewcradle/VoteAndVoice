@@ -13,6 +13,7 @@ public class Dbquestionnaire {
 	private String qn_des;
 	private String qn_type;
 	private String qn_tag;
+	private String qn_authority;
 	private String qn_state;
 	private String qn_validity;
 	private BigDecimal qn_q_count;
@@ -69,6 +70,14 @@ public class Dbquestionnaire {
 		this.qn_tag = qn_tag;
 	}
 	
+	public String getQn_authority() {
+		return qn_authority;
+	}
+
+	public void setQn_authority(String qn_authority) {
+		this.qn_authority = qn_authority;
+	}
+
 	public String getQn_state() {
 		return qn_state;
 	}
@@ -125,6 +134,7 @@ public class Dbquestionnaire {
 			this.setQn_des(rs.getString("qn_des"));
 			this.setQn_type(rs.getString("qn_type"));
 			this.setQn_tag(rs.getString("qn_tag"));
+			this.setQn_authority(rs.getString("qn_authority"));
 			this.setQn_state(rs.getString("qn_state"));
 			this.setQn_validity(rs.getString("qn_validity"));
 			this.setQn_q_count(rs.getBigDecimal("qn_q_count"));
