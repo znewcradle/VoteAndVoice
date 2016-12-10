@@ -10,6 +10,7 @@ public class Dbquestionnaire {
 	private String qn_title;
 	private String qn_des;
 	private String qn_type;
+	private String qn_tag;
 	private String qn_state;
 	private String qn_validity;
 	private BigDecimal qn_q_count;
@@ -56,6 +57,14 @@ public class Dbquestionnaire {
 	
 	public void setQn_type(String qn_type) {
 		this.qn_type = qn_type;
+	}
+
+	public String getQn_tag() {
+		return qn_tag;
+	}
+
+	public void setQn_tag(String qn_tag) {
+		this.qn_tag = qn_tag;
 	}
 	
 	public String getQn_state() {
