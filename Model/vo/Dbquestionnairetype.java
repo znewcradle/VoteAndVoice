@@ -5,7 +5,9 @@ import java.sql.SQLException;
 
 public class Dbquestionnairetype {
 	
-	private String qn_type_name;
+	private String qn_type_name = "ÆäËü";
+	
+	//no translation
 
 	public String getQn_type_name() {
 		return qn_type_name;
@@ -21,5 +23,14 @@ public class Dbquestionnairetype {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//translation
+	public String get_transQn_type_name() {
+		return qn_type_name;
+	}
+
+	public void set_transQn_type_name(String qn_type_name) {
+		this.qn_type_name = qn_type_name;
 	}
 }
