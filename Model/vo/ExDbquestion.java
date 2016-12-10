@@ -6,9 +6,10 @@ import java.util.ArrayList;
 
 public class ExDbquestion {
 	private Dbquestion question = new Dbquestion();
-	private String qn_title;
+	private String qn_title = "";
 	private ArrayList<ExDbitem> exItemList = null;
 	
+	//no translation
 	public Dbquestion getQuestion() {
 		return question;
 	}
@@ -39,5 +40,13 @@ public class ExDbquestion {
 			exItemList = new ArrayList<ExDbitem>();
 		}
 		return exItemList;
+	}
+	
+	//translation
+	public String get_transQn_title() {
+		return qn_title;
+	}
+	public void set_transQn_title(String qn_title) {
+		this.qn_title = qn_title;
 	}
 }

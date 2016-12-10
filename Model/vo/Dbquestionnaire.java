@@ -7,20 +7,21 @@ import java.sql.Timestamp;
 
 public class Dbquestionnaire {
 	
-	private String qn_id;
-	private String s_id;
-	private String qn_title;
-	private String qn_des;
-	private String qn_type;
-	private String qn_tag;
-	private String qn_authority;
-	private String qn_state;
-	private String qn_validity;
-	private BigDecimal qn_q_count;
-	private BigDecimal qn_a_count;
-	private Timestamp qn_starttime;
-	private Timestamp qn_endtime;
+	private String qn_id = "0";
+	private String s_id = "0";
+	private String qn_title = "";
+	private String qn_des = "";
+	private String qn_type = "其它";
+	private String qn_tag = "其它";
+	private String qn_authority = "";
+	private String qn_state = "";
+	private String qn_validity = "";
+	private BigDecimal qn_q_count = BigDecimal.valueOf(0);
+	private BigDecimal qn_a_count = BigDecimal.valueOf(0);
+	private Timestamp qn_starttime = Timestamp.valueOf("1926-08-17 00:00:01");
+	private Timestamp qn_endtime = Timestamp.valueOf("1926-08-17 00:00:01");
 	
+	//no translation
 	
 	public String getQn_id() {
 		return qn_id;
@@ -144,5 +145,158 @@ public class Dbquestionnaire {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//translation
+	public String get_transQn_id() {
+		return qn_id;
+	}
+	
+	public void set_transQn_id(String qn_id) {
+		this.qn_id = qn_id;
+	}
+	
+	public String get_transS_id() {
+		return s_id;
+	}
+	
+	public void set_transS_id(String s_id) {
+		this.s_id = s_id;
+	}
+	
+	public String get_transQn_title() {
+		return qn_title;
+	}
+	
+	public void set_transQn_title(String qn_title) {
+		this.qn_title = qn_title;
+	}
+	
+	public String get_transQn_des() {
+		return qn_des;
+	}
+	
+	public void set_transQn_des(String qn_des) {
+		this.qn_des = qn_des;
+	}
+	
+	public String get_transQn_type() {
+		return qn_type;
+	}
+	
+	public void set_transQn_type(String qn_type) {
+		this.qn_type = qn_type;
+	}
+
+	public String get_transQn_tag() {
+		return qn_tag;
+	}
+
+	public void set_transQn_tag(String qn_tag) {
+		this.qn_tag = qn_tag;
+	}
+	
+	public String get_transQn_authority() {
+		if (qn_authority.equals("pub"))
+		{
+			return "公有";
+		}
+		else if (qn_authority.equals("pri"))
+		{
+			return "私有";
+		}
+		return qn_authority;
+	}
+
+	public void set_transQn_authority(String qn_authority) {
+		if (qn_authority.equals("公有"))
+		{
+			this.qn_authority = "pub";
+		}
+		else if (qn_authority.equals("私有"))
+		{
+			this.qn_authority = "pri";
+		}
+		this.qn_authority = qn_authority;
+	}
+
+	public String get_transQn_state() {
+		if (qn_state.equals("ing"))
+		{
+			return "进行中";
+		}
+		else if (qn_state.equals("end"))
+		{
+			return "已结束";
+		}
+		return qn_state;
+	}
+	
+	public void set_transQn_state(String qn_state) {
+		if (qn_state.equals("进行中"))
+		{
+			this.qn_state = "ing";
+		}
+		else if (qn_state.equals("已结束"))
+		{
+			this.qn_state = "end";
+		}
+		this.qn_state = qn_state;
+	}
+	
+	public String get_transQn_validity() {
+		if (qn_validity.equals("P"))
+		{
+			return "合法";
+		}
+		else if (qn_validity.equals("N"))
+		{
+			return "非法";
+		}
+		return qn_validity;
+	}
+	
+	public void set_transQn_validity(String qn_validity) {
+		if (qn_validity.equals("合法"))
+		{
+			this.qn_validity = "P";
+		}
+		else if (qn_validity.equals("非法"))
+		{
+			this.qn_validity = "N";
+		}
+		this.qn_validity = qn_validity;
+	}
+	
+	public long get_transQn_q_count() {
+		return qn_q_count.longValue();
+	}
+	
+	public void set_transQn_q_count(long qn_q_count) {
+		this.qn_q_count = BigDecimal.valueOf(qn_q_count);
+	}
+
+	public String get_transQn_starttime() {
+		return qn_starttime.toString();
+	}
+
+	public void set_transQn_starttime(String qn_starttime) {
+		this.qn_starttime = Timestamp.valueOf(qn_starttime);
+	}
+
+	public String get_transQn_endtime() {
+		return qn_endtime.toString();
+	}
+
+	public void set_transQn_endtime(String qn_endtime) {
+		this.qn_endtime = Timestamp.valueOf(qn_endtime);
+	}
+
+	public long get_transQn_a_count() {
+		return qn_a_count.longValue();
+	}
+
+	public void set_transQn_a_count(long qn_a_count) {
+		this.qn_a_count = BigDecimal.valueOf(qn_a_count);
 	}
 }

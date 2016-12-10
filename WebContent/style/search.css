@@ -4,7 +4,7 @@
     margin-left: 10%;
     margin-bottom: 20px;
     height: 72px;
-    z-index: 9999;
+    z-index: 2;
     position: relative;
 }
 
@@ -154,15 +154,16 @@
 	color:#000;
 }
 .event_right p{
-	color: #777;
-    font-size: 0.95em;
+	color: #333;
+    font-size: 0.8em;
     line-height: 1.5em;
 }
 .event_right p a{
-	font-size:1.1em;
+	font-size:0.8em;
 	color:#000;
 }
 .event_right p a:hover{
+    font-size: 0.8em;
 	text-decoration:underline;
 }
 .event_right img{
@@ -172,6 +173,7 @@
 
 /* --events --*/
 .event-page{
+    font-size: 20px;
 	margin-bottom:2em;
 }
 .event-speakers {
@@ -195,7 +197,7 @@
 }
 
 .event-desc h2{
-	font-size:1.7em;
+	font-size:1.4em;
 	margin-bottom:10px;
 }
 .event-desc h2 a{
@@ -203,6 +205,10 @@
 }
 .event-desc h2 a:hover, .event-speakers li a:hover{
 	color:#777;
+}
+.link-font{
+    font-size: 0.8em;
+    color: #007ead;
 }
 .event-img{
 	overflow:hidden;
@@ -261,6 +267,7 @@ ul.meta-post{
 
 .courses_box1-left {
     background-color: #f2f4f5;
+    margin: 0 auto;
     padding: 20px 20px 30px;
     border-radius: 3px;
 }
@@ -279,25 +286,35 @@ ul.meta-post{
     border-radius: 5px;
 }
 
+.select-block1 select option{
+    font-size: 14px;
+}
+
 .course-submit {
+    width: 130px;
+    height: 50px;
     border: none;
     background-color: #f1b458;
     color: #ffffff;
     line-height: 44px;
     padding: 0 30px;
-    font-size: 14px;
+    font-size: 20px;
     text-transform: uppercase;
     border-radius:5px;
     display: inline-block;
     margin-top: 20px;
-    margin-left: 58%;
+    margin-left: 40%;
     outline: none;
 }
 /* 分页 */
+a {
+    text-decoration: none;
+}
+
 #page {
     height: 50px;
     display: table;
-    margin: 0 auto;
+    margin-left: 25%;
 }
 
 .page {
@@ -317,7 +334,7 @@ ul.meta-post{
     padding: 0;
     margin: 0;
     list-style: none;
-    height: 30px;
+    height: 40px;
 }
 
 .pagingUl li {
@@ -335,7 +352,7 @@ ul.meta-post{
     width: 30px;
     height: 30px;
     text-align: center;
-    line-height: 28px;
+    line-height: 40px;
     color: #666;
     font-size: 12px;
     border-radius: 5px
@@ -346,7 +363,7 @@ ul.meta-post{
     width: 30px;
     height: 30px;
     text-align: center;
-    line-height: 30px;
+    line-height: 40px;
     cursor: pointer;
     background: #fff;
     padding: 0 5px;
@@ -363,7 +380,7 @@ ul.meta-post{
     height: 30px;
     font-size: 12px;
     text-align: center;
-    line-height: 30px;
+    line-height: 40px;
     /*border: 1px solid #ddd;*/
     cursor: pointer;
     background: #fff;
@@ -378,6 +395,177 @@ ul.meta-post{
 .last:hover,
 .pagingUl li a:hover,
 .activP {
-    background-color: #d3c6f2!important;
+    background-color: #000!important;
     color: #fff!important;
+}
+
+/* 功能栏样式 */
+#function-list{
+    padding: 0;
+    margin-left: 25%;
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+    display:inline-block;
+}
+.function-list{
+    margin-left: 25%;
+    box-sizing: border-box;
+    display:inline-block;
+}
+.function-list h4 a{
+    color: #333333;
+}
+/* 这是user.html的样式 */
+
+img.img-rounded {
+    position: relative;
+    left: 25%;
+}
+div#user-name span{
+    position: relative;
+    left: 25%;
+}
+
+#side hr{
+    margin: 10px;
+    background-color: gainsboro;
+    border: none;
+    height: 1px;
+}
+
+a.dropdown-toggle:link,a.dropdown-toggle:hover, a.dropdown-toggle:visited, a.dropdown-toggle:active{
+    text-decoration: none;
+    text-color: black;
+}
+
+#function-list{
+    padding: 0;
+    margin-left: 25%;
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+    display:inline-block;
+}
+.function-list{
+    margin-left: 25%;
+    box-sizing: border-box;
+    display:inline-block;
+}
+.function-list h4 a{
+    color: #333333;
+}
+.dropdown ul{
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+    display:inline-block;
+}
+
+.user-button label,.dropdown ul li {
+    display: block;
+    width: 200px;
+    background: #ECF0F1;
+    opacity: 0.7;
+    padding: 15px 20px;
+}
+#basic label:hover, #basic label, #basic input{
+    color: #03a9f4;
+    border-left: 4px solid #03a9f4;
+}
+#questionnaire label:hover, #questionnaire label, #questionnaire input{
+    color: #ffc107;
+    border-left: 4px solid #ffc107;
+}
+#safe label:hover, #safe label, #safe input{
+    color: #ff8888;
+    border-left: 4px solid #ff8888;
+}
+#basic label:hover
+{
+    background: #03a9f4;
+    color:white;
+}
+#questionnaire label:hover
+{
+    background:#ffc107;
+    color:white;
+}
+#safe label:hover
+{
+    background: #ff8888;
+    color:white;
+}
+
+.user-button label {
+    border-radius: 0 5px 0 0;
+    position: relative;
+    z-index: 2;
+}
+.user-button input{
+    display: none;
+}
+
+.animate {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /* Chrome and Safari */
+    -moz-backface-visibility: hidden;
+    /* Firefox */
+    -ms-backface-visibility: hidden;
+    /* Internet Explorer */
+}
+/***************************This is for the basicInfo.html**************************/
+
+#info-content input:disabled {
+    background-color: #ffffff;
+}
+#info-content input{
+    border:none;
+    vertical-align: middle;
+}
+#content section{
+    display: inline;
+}
+section.v-item input {
+    width: 20%;
+}
+section.b-item input{
+    width: 40%;
+}
+span.coin{
+    background:url("../images/coin.png") no-repeat 1px 12px;
+    display: inline-block;
+    padding-right:15px;
+}
+p button {
+    position:relative;
+    left: 32%;
+}
+
+#v-info label{
+    text-align: right;
+    width: 150px;
+}
+
+/* questionlist.html的样式 */
+div.question-list h2 a{
+    color: #204d74;
+    margin-left: 60px;
+    font-size: 24px;
+}
+
+div.question-list p {
+    margin-left: 60px;
+    font-size: 0.8em;
+    color: #222222;
+}
+
+.row-list{
+    margin-right: -30px;
+    margin-left: -30px;
 }

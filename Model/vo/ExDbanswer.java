@@ -5,10 +5,12 @@ import java.sql.SQLException;
 
 public class ExDbanswer {
 	private Dbanswer answer = new Dbanswer();
-	private String u_name;
-	private String qn_title;
-	private String q_stem;
-	private String i_des;
+	private String u_name = "";
+	private String qn_title = "";
+	private String q_stem = "";
+	private String i_des = "";
+	
+	//no translation
 	
 	public Dbanswer getAnswer() {
 		return answer;
@@ -63,5 +65,34 @@ public class ExDbanswer {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//translation
+	public Dbanswer get_transAnswer() {
+		return answer;
+	}
+	public String get_transU_name() {
+		return u_name;
+	}
+	public void set_transU_name(String u_name) {
+		this.u_name = u_name;
+	}
+	public String get_transQn_title() {
+		return qn_title;
+	}
+	public void set_transQn_title(String qn_title) {
+		this.qn_title = qn_title;
+	}
+	public String get_transQ_stem() {
+		return q_stem;
+	}
+	public void set_transQ_stem(String q_stem) {
+		this.q_stem = q_stem;
+	}
+	public String get_transI_des() {
+		return i_des;
+	}
+	public void set_transI_des(String i_des) {
+		this.i_des = i_des;
 	}
 }
