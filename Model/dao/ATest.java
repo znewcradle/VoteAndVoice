@@ -55,23 +55,67 @@ public class ATest {
 		//UserInfoDAO
 		/*int result;
 		ArrayList<Dbuser> userList = new ArrayList<Dbuser>();
-		result = DAOFactory.getUserInfoDAO().getUserInfo("zhz123", userList);
+		result = DAOFactory.getUserInfoDAO().getUserInfoByName("张", userList, -1);
 		System.out.println(result);
 		if(userList.size()>0)System.out.println(userList.get(0).getU_validity());
-		userList.get(0).setU_ad_city("上海");;
+		userList.get(0).setU_ad_country("China");
 		result = DAOFactory.getUserInfoDAO().changeUserInfo(userList.get(0));
 		System.out.println(result);*/
 		
 		//SearchQnDAO
 		/*int result;
-		//ArrayList<ExDbquestionnaire> list = new ArrayList<ExDbquestionnaire>();
-		//result = DAOFactory.getSearchQnDAO().getExQnsByQnTitle("ti", list);
-		//result = DAOFactory.getSearchQnDAO().getExQnsByQnTitleByQnTypeOrTag("ACG", list);
-		ArrayList<ExDbquestion> list = new ArrayList<ExDbquestion>();
-		result = DAOFactory.getSearchQnDAO().getExQByAStem("是", list);
+		ArrayList<ExDbquestionnaire> list = new ArrayList<ExDbquestionnaire>();
+		//result = DAOFactory.getSearchQnDAO().getExQnsByQnTitle("ti", list, -1);
+		result = DAOFactory.getSearchQnDAO().getExQnsByQnTitleByQnTypeOrTag("ACG", list, -1);
+		//ArrayList<ExDbquestion> list = new ArrayList<ExDbquestion>();
+		//result = DAOFactory.getSearchQnDAO().getExQByAStem("是", list, -1);
 		System.out.println(result + "\nsize:\t" + list.size());
 		for(int i = 0; i != list.size(); i++) {
-			System.out.println(list.get(i).getQn_title() + list.get(i).getQuestion().getQ_stem());
+			System.out.println(list.get(i).getS_name() + list.get(i).getQuestionnaire().getQn_title());
 		}*/
+		
+		//CreateQnDAO
+		/*int result;
+		ArrayList<Dbquestionnairetype> qnTypeList = new ArrayList<Dbquestionnairetype>();
+		result = DAOFactory.getCreateQnDAO().getQnTypes(qnTypeList);
+		System.out.println(result + "\nsize:\t" + qnTypeList.size());
+		for(int i = 0; i != qnTypeList.size(); i++)
+			System.out.println(qnTypeList.get(i).getQn_type_name());
+		ExDbquestionnaire exQn = new ExDbquestionnaire();
+		exQn.getQuestionnaire().setQn_id("00000000000000000010");
+		exQn.getQuestionnaire().setS_id("yyf123");
+		exQn.getQuestionnaire().setQn_title("大学生读书时间调查");
+		exQn.getQuestionnaire().setQn_des("读书使人进步");
+		exQn.getQuestionnaire().setQn_type("文化");
+		exQn.getQuestionnaire().setQn_tag("ACG");
+		exQn.getQuestionnaire().setQn_authority("pri");
+		exQn.getQuestionnaire().setQn_endtime(Timestamp.valueOf("2017-12-10 03:06:15"));
+		//result = DAOFactory.getCreateQnDAO().createQn(exQn.getQuestionnaire());
+		//result = DAOFactory.getCreateQnDAO().setVCoin("yyf123", 100);
+		for(int i = 0; i != 2; i++) {
+			ExDbquestion exQ = new ExDbquestion();
+			exQ.getQuestion().setQ_stem("测试题目");
+			exQ.getQuestion().setQ_des("测试描述");
+			exQ.getQuestion().setQ_type("sig");
+			for(int j = 0; j != 3; j++) {
+				ExDbitem exI = new ExDbitem();
+				exI.getItem().setI_type("sig");
+				exI.getItem().setI_des("测试选项");
+				exQ.getExItemList().add(exI);
+			}
+			exQn.getExQuestionList().add(exQ);
+		}
+		result = DAOFactory.getCreateQnDAO().createQsIs(exQn);
+		ArrayList<Dbown> ownList = new ArrayList<Dbown>();
+		for(int i = 0; i != 3; i++) {
+			Dbown own = new Dbown();
+			own.setQn_id("00000000000000000002");
+			ownList.add(own);
+		}
+		ownList.get(0).setU_id("zhz123");
+		ownList.get(1).setU_id("bty123");
+		ownList.get(2).setU_id("xyj123");
+		result = DAOFactory.getCreateQnDAO().createOwnList(ownList);
+		System.out.println(result);*/
 	}
 }

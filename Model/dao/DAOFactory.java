@@ -28,4 +28,8 @@ public class DAOFactory {
 	static public SearchQnDAO getSearchQnDAO() {
 		return new SearchQnDAO();
 	}
+	
+	static public CreateQnDAO getCreateQnDAO() {
+		return new CreateQnDAO();
+	}
 }
