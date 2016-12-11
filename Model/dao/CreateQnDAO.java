@@ -61,33 +61,74 @@ public class CreateQnDAO {
 		return message;
 	}
 	
-	public int createQn(Dbquestionnaire questionnaire) {
-		int message = EXCEPTION;
-		String sql = "insert into db_16.questionnaire(qn_id, s_id, qn_title, qn_des, qn_type, qn_tag, qn_authority, qn_endtime) "
+	public int createQn(ArrayList<Dbquestionnaire> questionnaireList, long cost) {
+		int message = FAILED;
+		String sqlQn = "insert into db_16.questionnaire(qn_id, s_id, qn_title, qn_des, qn_type, qn_tag, qn_authority, qn_endtime) "
 				+ "values(?,?,?,?,?,?,?,?) ";
+		String sqlGetQnId = "select * from db_16.questionnaire "
+				+ "where s_id = ? "
+				+ "order by qn_starttime desc ";
+		String sqlChangeVcoin = "update db_16.user "
+				+ "set v_coin = ? "
+				+ "where u_id = ? ";
 		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, questionnaire.getQn_id());
-			pstmt.setString(2, questionnaire.getS_id());
-			pstmt.setString(3, questionnaire.getQn_title());
-			pstmt.setString(4, questionnaire.getQn_des());
-			pstmt.setString(5, questionnaire.getQn_type());
-			pstmt.setString(6, questionnaire.getQn_tag());
-			pstmt.setString(7, questionnaire.getQn_authority());
-			pstmt.setTimestamp(8, questionnaire.getQn_endtime());
-			int i = pstmt.executeUpdate();
-			if(i > 0) {
-				message = SUCCESS;
+			conn.setAutoCommit(false);
+			if(questionnaireList.size() != 0) {
+				String s_id = questionnaireList.get(0).getS_id();
+				PreparedStatement pstmtQn = conn.prepareStatement(sqlQn);
+				pstmtQn.setString(1, questionnaireList.get(0).getQn_id());
+				pstmtQn.setString(2, s_id);
+				pstmtQn.setString(3, questionnaireList.get(0).getQn_title());
+				pstmtQn.setString(4, questionnaireList.get(0).getQn_des());
+				pstmtQn.setString(5, questionnaireList.get(0).getQn_type());
+				pstmtQn.setString(6, questionnaireList.get(0).getQn_tag());
+				pstmtQn.setString(7, questionnaireList.get(0).getQn_authority());
+				pstmtQn.setTimestamp(8, questionnaireList.get(0).getQn_endtime());
+				int i = pstmtQn.executeUpdate();
+				if(i > 0) {
+					PreparedStatement pstmtGetQnId = conn.prepareStatement(sqlGetQnId);
+					pstmtGetQnId.setString(1, s_id);
+					ResultSet rs = pstmtGetQnId.executeQuery();
+					if(rs.next()) {
+						if(rs.getBigDecimal("qn_q_count").longValue() == 0) {
+							questionnaireList.get(0).setAll(rs);
+							ArrayList<Dbuser> userList = new ArrayList<Dbuser>();
+							int checkMessage = DAOFactory.getUserInfoDAO().getUserInfo(s_id, userList);
+							if(checkMessage > 0) {
+								long oldVCoin = userList.get(0).getV_coin().longValue();
+								long newVCoin = oldVCoin - cost;
+								if(newVCoin >= 0) {
+									PreparedStatement pstmtChangeVcoin = conn.prepareStatement(sqlChangeVcoin);
+									pstmtChangeVcoin.setBigDecimal(1, BigDecimal.valueOf(newVCoin));
+									pstmtChangeVcoin.setString(2, s_id);
+									int changeVcoinCount = pstmtChangeVcoin.executeUpdate();
+									if(changeVcoinCount > 0) {
+										message = SUCCESS;
+									}
+								}
+								else {
+									message = INSUFFICIENT;
+								}
+							}
+							else {
+								message = checkMessage;
+							}
+						}
+					}
+				}
 			}
-			else {
-				message = FAILED;
-			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			message = EXCEPTION;
 			System.out.println("MySQL fault.");
 			e.printStackTrace();
 		} finally {
 			try {
+				if(message == SUCCESS) {
+					conn.commit();
+				}
+				else {
+					conn.rollback();
+				}
 				dbconn.close();
 			} catch (Exception e) {
 				message = EXCEPTION;
@@ -182,7 +223,7 @@ public class CreateQnDAO {
 	}
 
 	public int createQsIs(ExDbquestionnaire exQuestionnaire) {
-		int message = EXCEPTION;
+		int message = FAILED;
 		String sqlQn = "update db_16.questionnaire "
 				+ "set qn_q_count = ? "
 				+ "where qn_id = ? ";
@@ -198,59 +239,51 @@ public class CreateQnDAO {
 			pstmtQn.setBigDecimal(1, BigDecimal.valueOf((long)exQuestionList.size()));
 			pstmtQn.setString(2, qn_id);
 			int countQn = pstmtQn.executeUpdate();
-			if(countQn == 0){
-				message = FAILED;
-				conn.rollback();
-				dbconn.close();
-				return message;
-			}
-			for(int i = 0; i != exQuestionList.size(); i++) {
-				ExDbquestion exQuestion = exQuestionList.get(i);
-				ArrayList<ExDbitem> exItemList = exQuestionList.get(i).getExItemList();
-				PreparedStatement pstmtQ = conn.prepareStatement(sqlQ);
-				pstmtQ.setString(1, qn_id);
-				pstmtQ.setBigDecimal(2, BigDecimal.valueOf((long)i + 1));
-				pstmtQ.setString(3, exQuestion.getQuestion().getQ_type());
-				pstmtQ.setString(4, exQuestion.getQuestion().getQ_stem());
-				pstmtQ.setString(5, exQuestion.getQuestion().getQ_des());
-				pstmtQ.setBigDecimal(6, BigDecimal.valueOf((long)exItemList.size()));
-				int countQ = pstmtQ.executeUpdate();
-				if(countQ == 0){
-					message = FAILED;
-					conn.rollback();
-					dbconn.close();
-					return message;
-				}
-				for(int j = 0; j != exItemList.size(); j++) {
-					ExDbitem exItem = exItemList.get(i);
-					PreparedStatement pstmtI = conn.prepareStatement(sqlI);
-					pstmtI.setString(1, qn_id);
-					pstmtI.setBigDecimal(2, BigDecimal.valueOf((long)i + 1));
-					pstmtI.setBigDecimal(3, BigDecimal.valueOf((long)j + 1));
-					pstmtI.setString(4, exItem.getItem().getI_type());
-					pstmtI.setString(5, exItem.getItem().getI_des());
-					int countI = pstmtI.executeUpdate();
-					if(countI == 0){
+			if(countQn > 0) {
+				message = SUCCESS;
+				createQsIsOUT: for(int i = 0; i != exQuestionList.size(); i++) {
+					ExDbquestion exQuestion = exQuestionList.get(i);
+					ArrayList<ExDbitem> exItemList = exQuestionList.get(i).getExItemList();
+					PreparedStatement pstmtQ = conn.prepareStatement(sqlQ);
+					pstmtQ.setString(1, qn_id);
+					pstmtQ.setBigDecimal(2, BigDecimal.valueOf((long)i + 1));
+					pstmtQ.setString(3, exQuestion.getQuestion().getQ_type());
+					pstmtQ.setString(4, exQuestion.getQuestion().getQ_stem());
+					pstmtQ.setString(5, exQuestion.getQuestion().getQ_des());
+					pstmtQ.setBigDecimal(6, BigDecimal.valueOf((long)exItemList.size()));
+					int countQ = pstmtQ.executeUpdate();
+					if(countQ == 0){
 						message = FAILED;
-						conn.rollback();
-						dbconn.close();
-						return message;
+						break createQsIsOUT;
+					}
+					for(int j = 0; j != exItemList.size(); j++) {
+						ExDbitem exItem = exItemList.get(j);
+						PreparedStatement pstmtI = conn.prepareStatement(sqlI);
+						pstmtI.setString(1, qn_id);
+						pstmtI.setBigDecimal(2, BigDecimal.valueOf((long)i + 1));
+						pstmtI.setBigDecimal(3, BigDecimal.valueOf((long)j + 1));
+						pstmtI.setString(4, exItem.getItem().getI_type());
+						pstmtI.setString(5, exItem.getItem().getI_des());
+						int countI = pstmtI.executeUpdate();
+						if(countI == 0){
+							message = FAILED;
+							break createQsIsOUT;
+						}
 					}
 				}
 			}
-			conn.commit();
-			message = SUCCESS;
 		} catch (Exception e) {
 			message = EXCEPTION;
-			try {
-				conn.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
 			System.out.println("MySQL fault.");
 			e.printStackTrace();
 		} finally {
 			try {
+				if(message == SUCCESS) {
+					conn.commit();
+				}
+				else {
+					conn.rollback();
+				}
 				dbconn.close();
 			} catch (Exception e) {
 				message = EXCEPTION;

@@ -32,4 +32,12 @@ public class DAOFactory {
 	static public CreateQnDAO getCreateQnDAO() {
 		return new CreateQnDAO();
 	}
+	
+	static public AnswerQnDAO getAnswerQnDAO() {
+		return new AnswerQnDAO();
+	}
+	
+	static public GetResultDAO getGetResultDAO() {
+		return new GetResultDAO();
+	}
 }
