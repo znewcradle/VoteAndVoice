@@ -1,5 +1,6 @@
 package vo;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class ExDbitem {
 	private String qn_title = "";
 	private String q_stem = "";
 	private ArrayList<ExDbanswer> exAnswerList = null;
-	
+	private BigDecimal i_a_count = BigDecimal.valueOf(0);
 	//no translation
 	
 	public Dbitem getItem() {
@@ -50,6 +51,12 @@ public class ExDbitem {
 		}
 		return exAnswerList;
 	}
+	public BigDecimal getI_a_count() {
+		return i_a_count;
+	}
+	public void setI_a_count(BigDecimal i_a_count) {
+		this.i_a_count = i_a_count;
+	}
 	
 	//translation
 	public String get_transQn_title() {
@@ -63,5 +70,11 @@ public class ExDbitem {
 	}
 	public void set_transQ_stem(String q_stem) {
 		this.q_stem = q_stem;
+	}
+	public long get_transI_a_count() {
+		return i_a_count.longValue();
+	}
+	public void set_transI_a_count(long i_a_count) {
+		this.i_a_count = BigDecimal.valueOf(i_a_count);
 	}
 }
