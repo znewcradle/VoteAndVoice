@@ -201,10 +201,6 @@ public class Dbquestionnaire {
 		{
 			return "公有";
 		}
-		else if (qn_authority.equals("sem"))
-		{
-			return "半公开";
-		}
 		else if (qn_authority.equals("pri"))
 		{
 			return "私有";
@@ -216,10 +212,6 @@ public class Dbquestionnaire {
 		if (qn_authority.equals("公有"))
 		{
 			this.qn_authority = "pub";
-		}
-		else if (qn_authority.equals("半公开"))
-		{
-			this.qn_authority = "sem";
 		}
 		else if (qn_authority.equals("私有"))
 		{
