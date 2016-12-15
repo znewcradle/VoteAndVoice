@@ -42,17 +42,7 @@ public class NewsDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Dbquestionnaire questionnaire = new Dbquestionnaire();
-				questionnaire.setQn_id(rs.getString("qn_id"));
-				questionnaire.setS_id(rs.getString("s_id"));
-				questionnaire.setQn_title(rs.getString("qn_title"));
-				questionnaire.setQn_des(rs.getString("qn_des"));
-				questionnaire.setQn_type(rs.getString("qn_type"));
-				questionnaire.setQn_state(rs.getString("qn_state"));
-				questionnaire.setQn_validity(rs.getString("qn_validity"));
-				questionnaire.setQn_q_count(rs.getBigDecimal("qn_q_count"));
-				questionnaire.setQn_a_count(rs.getBigDecimal("qn_a_count"));
-				questionnaire.setQn_starttime(rs.getTimestamp("qn_starttime"));
-				questionnaire.setQn_endtime(rs.getTimestamp("qn_endtime"));
+				questionnaire.setAll(rs);
 				questionnaireList.add(questionnaire);
 			}
 			message = SUCCESS;
@@ -85,21 +75,10 @@ public class NewsDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				ExDbquestionnaire exQuestionnaire = new ExDbquestionnaire();
-				exQuestionnaire.getQuestionnaire().setQn_id(rs.getString("qn_id"));
-				exQuestionnaire.getQuestionnaire().setS_id(rs.getString("s_id"));
-				exQuestionnaire.getQuestionnaire().setQn_title(rs.getString("qn_title"));
-				exQuestionnaire.getQuestionnaire().setQn_des(rs.getString("qn_des"));
-				exQuestionnaire.getQuestionnaire().setQn_type(rs.getString("qn_type"));
-				exQuestionnaire.getQuestionnaire().setQn_state(rs.getString("qn_state"));
-				exQuestionnaire.getQuestionnaire().setQn_validity(rs.getString("qn_validity"));
-				exQuestionnaire.getQuestionnaire().setQn_q_count(rs.getBigDecimal("qn_q_count"));
-				exQuestionnaire.getQuestionnaire().setQn_a_count(rs.getBigDecimal("qn_a_count"));
-				exQuestionnaire.getQuestionnaire().setQn_starttime(rs.getTimestamp("qn_starttime"));
-				exQuestionnaire.getQuestionnaire().setQn_endtime(rs.getTimestamp("qn_endtime"));
-				exQuestionnaire.setS_name(rs.getString("s_name"));
+				exQuestionnaire.setAll(rs);
 				exQuestionnaireList.add(exQuestionnaire);
-				message = SUCCESS;
 			}
+			message = SUCCESS;
 		} catch (SQLException e) {
 			message = EXCEPTION;
 			System.out.println("MySQL fault.");
@@ -129,15 +108,10 @@ public class NewsDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Dbanswer answer = new Dbanswer();
-				answer.setU_id(rs.getString("u_id"));
-				answer.setQn_id(rs.getString("qn_id"));
-				answer.setQ_id(rs.getBigDecimal("q_id"));
-				answer.setI_id(rs.getBigDecimal("i_id"));
-				answer.setA_timestamp(rs.getTimestamp("a_timestamp"));
-				answer.setA_content(rs.getString("a_content"));
+				answer.setAll(rs);
 				answerList.add(answer);
-				message = SUCCESS;
 			}
+			message = SUCCESS;
 		} catch (SQLException e) {
 			message = EXCEPTION;
 			System.out.println("MySQL fault.");
@@ -170,19 +144,10 @@ public class NewsDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				ExDbanswer exAnswer = new ExDbanswer();
-				exAnswer.getAnswer().setU_id(rs.getString("u_id"));
-				exAnswer.getAnswer().setQn_id(rs.getString("qn_id"));
-				exAnswer.getAnswer().setQ_id(rs.getBigDecimal("q_id"));
-				exAnswer.getAnswer().setI_id(rs.getBigDecimal("i_id"));
-				exAnswer.getAnswer().setA_timestamp(rs.getTimestamp("a_timestamp"));
-				exAnswer.getAnswer().setA_content(rs.getString("a_content"));
-				exAnswer.setU_name(rs.getString("u_name"));
-				exAnswer.setQn_title(rs.getString("qn_title"));
-				exAnswer.setQ_stem(rs.getString("q_stem"));
-				exAnswer.setI_des(rs.getString("i_des"));
+				exAnswer.setAll(rs);
 				exAnswerList.add(exAnswer);
-				message = SUCCESS;
 			}
+			message = SUCCESS;
 		} catch (SQLException e) {
 			message = EXCEPTION;
 			System.out.println("MySQL fault.");

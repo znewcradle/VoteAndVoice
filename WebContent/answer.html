@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>关于自闭症儿童的调查问卷</title>
+    <link rel="stylesheet" href="style/answer.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+<!-- 问卷框架 -->
+<div class="wjContent clear" id="survey_page">
+    <!-- 问卷标题 -->
+    <div class="content" id="begin_content" style="">
+        <div class="wjtitle mtop project_title">
+            <h1>关于自闭症儿童的调查问卷</h1>
+        </div>
+        <div class="wjintro mtop desc_begin">
+            <p></p>
+        </div>
+        <div class="wjhr mtop"></div>
+    </div>
+    <!-- 问题列表 -->
+    <div id="question_box">
+        <!-- 加载中 -->
+        <div class="maxtop btns title" id="loader_div_1" style="display:none; text-align:center;">
+            <img src="https://static-wenjuan.b0.upaiyun.com/static/img/survey/loader.gif?v=b256d80f54c1415d7a6a6fdec39769f4"
+                 alt=""/>
+            <br/>
+            加载中...
+        </div>
+        <!-- 问卷中的问题在这里！！！使用js，通过数据库返回信息生成！！！ -->
+        <!-- 单选题模板 -->
+        <div class="wjques maxtop question jqtransformdone" id="question_54786148f7405b1aab59360f" questiontype="2">
+            <!-- 题干 -->
+            <div class="title">
+                你是否曾见过或接触过自闭症儿童？<br>
+            </div>
+            <div class="matrix">
+                <div id="tip_54786148f7405b1aab59360f" class="red">
+                </div>
+                <!-- 选项1 -->
+                <div class="icheckbox_div " style="">
+                    <span class="jqTransformRadioWrapper"><a href="#" class="jqTransformRadio"
+                                                             rel="question_54786148f7405b1aab59360f"></a><input
+                            name="question_54786148f7405b1aab59360f" value="54786148f7405b1aab593610"
+                            id="option_54786148f7405b1aab593610" class="option jqTransformHidden"
+                            type="radio"></span><label for="option_54786148f7405b1aab593610"
+                                                       class="option_label label_54786148f7405b1aab593610"
+                                                       style="cursor: pointer;">是<br>
+                </label>
+                </div>
+                <!-- 选项2 -->
+                <div class="icheckbox_div " style="">
+                    <span class="jqTransformRadioWrapper"><a href="#" class="jqTransformRadio"
+                                                             rel="question_54786148f7405b1aab59360f"></a><input
+                            name="question_54786148f7405b1aab59360f" value="54786148f7405b1aab593611"
+                            id="option_54786148f7405b1aab593611" class="option jqTransformHidden"
+                            type="radio"></span><label for="option_54786148f7405b1aab593611"
+                                                       class="option_label label_54786148f7405b1aab593611"
+                                                       style="cursor: pointer;">否</label>
+                </div>
+            </div>
+        </div>
+        <!-- 多选题模板 -->
+        <div class="wjques maxtop question jqtransformdone" id="question_54786ccff7405b1aab593832" questiontype="3">
+            <!-- 题干 -->
+            <div class="title">
+                你对自闭症有何了解？<br>
+            </div>
+            <div class="matrix vote">
+                <div id="tip_54786ccff7405b1aab593832" class="red">
+                </div>
+                <!-- 选项1 -->
+                <div class="icheckbox_div " style="">
+                    <span class="jqTransformCheckboxWrapper"><a href="#" class="jqTransformCheckbox"
+                                                                rel="question_54786ccff7405b1aab593832"></a><input
+                            name="question_54786ccff7405b1aab593832" id="option_54786ccff7405b1aab593833"
+                            class="option jqTransformHidden" type="checkbox"></span><label
+                        class="option_label label_54786ccff7405b1aab593833"
+                        style="cursor: pointer;">自闭症是一种不愿与他人交流的表现</label>
+                    <div class="fontVoteProgressBox">
+                        <div class="progressBox">
+                            <div class="progress_vote">
+                            </div>
+                        </div>
+                        <ul class="progress_info">
+                            <li class="percentage"></li>
+                            <li class="vote_N"></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 选项2 -->
+                <div class="icheckbox_div " style="">
+                    <span class="jqTransformCheckboxWrapper"><a href="#" class="jqTransformCheckbox"
+                                                                rel="question_54786ccff7405b1aab593832"></a><input
+                            name="question_54786ccff7405b1aab593832" id="option_54786ccff7405b1aab593834"
+                            class="option jqTransformHidden" type="checkbox"></span><label
+                        class="option_label label_54786ccff7405b1aab593834"
+                        style="cursor: pointer;">自闭症是先天性疾病<br>
+                </label>
+                    <div class="fontVoteProgressBox">
+                        <div class="progressBox">
+                            <div class="progress_vote">
+                            </div>
+                        </div>
+                        <ul class="progress_info">
+                            <li class="percentage"></li>
+                            <li class="vote_N"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 问答题模板 -->
+        <div class="wjques maxtop question jqtransformdone" id="question_5478854af7405b19f5956380" allow_null="1" questiontype="6">
+            <!-- 题干 -->
+            <div class="title">你觉得我们应该如何帮助自闭症儿童？<br>
+            </div>
+            <div class="matrix">
+                <div id="tip_5478854af7405b19f5956380" class="red"></div>
+                <div><textarea class="blank option" id="5478854af7405b19f5956381" cols="40"
+                               rows="5" option_id="5478854af7405b19f5956381"></textarea><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 提交答案 -->
+    <div class="maxtop btns" id="control_panel">
+        <div class="WJButton wj_color" id="confirm_verify_btn" style="">提 交</div>
+        <div class="red fL" id="err_msg"></div>
+        <div class="wjprogress" id="progress_bar" style="display:none;">
+            <span>20%</span>
+            <div class="bar">
+                <div class="barbox"></div>
+            </div>
+        </div>
+        <div id="timeremain"></div>
+    </div>
+    <!-- 正在保存 -->
+    <div class="maxtop btns title" id="loader_div" style="display:none; text-align:center;">
+        <img src="https://static-wenjuan.b0.upaiyun.com/static/img/survey/loader.gif?v=b256d80f54c1415d7a6a6fdec39769f4"
+             alt=""/>
+        <br/>
+        <div id="loader_text">正在保存...</div>
+    </div>
+    <!-- 推广感谢 -->
+    <div class="conthank" id="survey_end" style="display:none;">
+        <div class="envelope_draw">
+            <a>感谢您填写问卷！</a>
+            <a target="_blank" href="#" class="end_create_btn">我也要免费创建问卷</a>
+        </div>
+    </div>
+    <!-- 问题列表 -->
+    <!-- 错误信息 -->
+    <div class="Error_message" id="error_msg_box" style="display:none;">
+        <span class="error_text"></span>
+        <a href="#" class="WJButton wj_color" style="display:none;" id="fankui">&nbsp;&nbsp;马上联系我们&nbsp;&nbsp;</a>
+    </div>
+</div>
+<!-- 脚注 -->
+<div class="footer_mini">
+    <div class="footer">
+        <div class="instructions">
+            <div class="footer_logo">
+                <div class='wjtext'><a href='#' target='_blank'>Vote&Voice </a><span>&nbsp;By Empire Yin</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="report_doc_content" style="display:none" action="#"
+      method="POST">
+    <input type="hidden" name="proj_id" value="5478612df7405b1aab59360a">
+    <input type="hidden" name="_xsrf" value="a899f8413be248c89c468b02b9a8f134"/>
+</form>
+<form action="#" method="post" id="upload_form">
+    <input type="hidden" name="_xsrf" value="a899f8413be248c89c468b02b9a8f134"/>
+    <input type="hidden" name="total_answers_str" id="total_answers_str"/>
+    <input type="hidden" name="finish_status" id="finish_status"/>
+    <input type="hidden" name="timestr" value="2016-12-09 18:54:35"/>
+    <input type="hidden" name="idy_uuid" value="cd30affdd673c46b20afd1e26aa813ad"/>
+    <input type="hidden" name="version" value="2"/>
+    <input type="hidden" name="s_func_id" value="47"/>
+    <input type="hidden" name="vvv" value="ac69e0cd89a9ade71c7d8338cdc4028a"/>
+    <input type="hidden" name="rand_int" value="79"/>
+    <input type="hidden" name="pconvert_data" id="pconvert_data"/>
+    <input type="hidden" name="svc" id="svc"/>
+    <input type="hidden" name="s_code" id="s_code"/>
+    <input type="hidden" name="from_form" value="1"/>
+</form>
+</body>
+</html>
