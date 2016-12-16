@@ -43,10 +43,16 @@ public class ExDbquestion {
 	}
 	
 	//translation
+	public Dbquestion get_transQuestion() {
+		return question;
+	}
 	public String get_transQn_title() {
 		return qn_title;
 	}
 	public void set_transQn_title(String qn_title) {
 		this.qn_title = qn_title;
+	}
+	public ArrayList<ExDbitem> get_transExItemList() {
+		return getExItemList();
 	}
 }

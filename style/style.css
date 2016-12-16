@@ -12,7 +12,7 @@
 *
 * ======================================================= */
 body {
-  font-family: "Microsoft Yahei", Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   line-height: 1.8;
   font-size: 20px;
   background: #eeeff0;
@@ -38,12 +38,12 @@ p {
   font-size: 20px;
   color: #848484;
   font-weight: 300;
-  font-family: "Microsoft Yahei", Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: #000;
-  font-family: "Microsoft Yahei", Arial, sans-serif;
+  font-family: "Roboto Slab", Arial, sans-serif;
   font-weight: 400;
   margin: 0 0 30px 0;
 }
@@ -136,7 +136,7 @@ header span.logo a{
   margin-left: 0;
 }
 #fh5co-header .nav li a {
-  font-family: "Microsoft Yahei", Arial, sans-serif;
+  font-family: "Roboto Slab", Arial, sans-serif;
   color: black;
   position: relative;
   font-weight: 400;
@@ -196,7 +196,7 @@ header span.logo a{
 }
 
 .intro h2 {
-  font-family: "Microsoft Yahei", Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   font-size: 30px;
   font-weight: 300;
   line-height: 1.5em;
@@ -435,8 +435,8 @@ footer .social {
 .btn.btn-primary {
   background: #52d3aa;
   color: #fff;
-  border: none !important;
-  border: 2px solid transparent !important;
+  border: none;
+  border: 2px solid transparent;
 }
 .btn.btn-primary:hover, .btn.btn-primary:active, .btn.btn-primary:focus {
   box-shadow: none;

@@ -59,6 +59,9 @@ public class ExDbitem {
 	}
 	
 	//translation
+	public Dbitem get_transItem() {
+		return item;
+	}
 	public String get_transQn_title() {
 		return qn_title;
 	}
@@ -70,6 +73,9 @@ public class ExDbitem {
 	}
 	public void set_transQ_stem(String q_stem) {
 		this.q_stem = q_stem;
+	}
+	public ArrayList<ExDbanswer> get_transExAnswerList() {
+		return getExAnswerList();
 	}
 	public long get_transI_a_count() {
 		return i_a_count.longValue();

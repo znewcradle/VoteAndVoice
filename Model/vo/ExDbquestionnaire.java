@@ -44,10 +44,16 @@ public class ExDbquestionnaire {
 	}
 	
 	//translation
+	public Dbquestionnaire get_transQuestionnaire() {
+		return questionnaire;
+	}
 	public String get_transS_name() {
 		return s_name;
 	}
 	public void set_transS_name(String s_name) {
 		this.s_name = s_name;
-	}	
+	}
+	public ArrayList<ExDbquestion> get_transExQuestionList() {
+		return getExQuestionList();
+	}
 }
