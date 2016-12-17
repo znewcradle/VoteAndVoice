@@ -29,7 +29,7 @@ public class SearchQnDAO {
 		conn = dbconn.getConnection();
 	}
 	
-	public int getExQnsByQnTitle(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int authority,  int totalCount, String orderBy) {
+	public int getExQnsByQnTitle(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int authority,  int limit, String orderBy) {
 		int message = EXCEPTION;
 		String authorityString = "";
 		switch(authority) {
@@ -43,18 +43,21 @@ public class SearchQnDAO {
 			break;	
 		}
 		if(!orderBy.equals("")) {
-			orderBy = "order by " + orderBy;
+			orderBy = "order by " + orderBy + " ";
 		}
 		String sql = "select * from "
 				+ "(select * from db_16.questionnaire where qn_title like ? " + authorityString + " ) questionnaire "
 				+ "join (select u_id s_id, u_name s_name from db_16.user) user using(s_id) "
 				+ orderBy;
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+		}
 		exQuestionnaireList.clear();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + qn_title + "%");
 			ResultSet rs = pstmt.executeQuery();
-			for(int i = 0; rs.next() && i != totalCount; i++) {
+			while(rs.next()) {
 				ExDbquestionnaire exQuestionnaire = new ExDbquestionnaire();
 				exQuestionnaire.setAll(rs);
 				exQuestionnaireList.add(exQuestionnaire);
@@ -74,23 +77,23 @@ public class SearchQnDAO {
 		}
 		return message;
 	}
-	public int getExQnsByQnTitle(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int authority, int totalCount) {
-		return this.getExQnsByQnTitle(qn_title, exQuestionnaireList, authority, totalCount, "");
+	public int getExQnsByQnTitle(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int authority, int limit) {
+		return this.getExQnsByQnTitle(qn_title, exQuestionnaireList, authority, limit, "");
 	}
-	public int getAllExQnsByQnTitle(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int totalCount, String orderBy) {
-		return this.getExQnsByQnTitle(qn_title, exQuestionnaireList, ALL, totalCount, orderBy);
+	public int getAllExQnsByQnTitle(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit, String orderBy) {
+		return this.getExQnsByQnTitle(qn_title, exQuestionnaireList, ALL, limit, orderBy);
 	}
-	public int getAllExQnsByQnTitle(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int totalCount) {
-		return this.getAllExQnsByQnTitle(qn_title, exQuestionnaireList, totalCount, "");
+	public int getAllExQnsByQnTitle(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit) {
+		return this.getAllExQnsByQnTitle(qn_title, exQuestionnaireList, limit, "");
 	}
-	public int getPubExQnsByQnTitle(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int totalCount, String orderBy) {
-		return this.getExQnsByQnTitle(qn_title, exQuestionnaireList, PUBONLY, totalCount, orderBy);
+	public int getPubExQnsByQnTitle(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit, String orderBy) {
+		return this.getExQnsByQnTitle(qn_title, exQuestionnaireList, PUBONLY, limit, orderBy);
 	}
-	public int getPubExQnsByQnTitle(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int totalCount) {
-		return this.getPubExQnsByQnTitle(qn_title, exQuestionnaireList, totalCount, "");
+	public int getPubExQnsByQnTitle(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit) {
+		return this.getPubExQnsByQnTitle(qn_title, exQuestionnaireList, limit, "");
 	}
 	
-	public int getExQnsByQnTitleByQnTypeOrTag(String qn_typeOrTag, ArrayList<ExDbquestionnaire> exQuestionnaireList, int authority, int totalCount, String orderBy) {
+	public int getExQnsByQnTitleByQnTypeOrTag(String qn_typeOrTag, ArrayList<ExDbquestionnaire> exQuestionnaireList, int authority, int limit, String orderBy) {
 		int message = EXCEPTION;
 		String authorityString = "";
 		switch(authority) {
@@ -104,19 +107,22 @@ public class SearchQnDAO {
 			break;	
 		}
 		if(!orderBy.equals("")) {
-			orderBy = "order by " + orderBy;
+			orderBy = "order by " + orderBy + " ";
 		}
 		String sql = "select * from "
 				+ "(select * from db_16.questionnaire where qn_type = ? or qn_tag = ? " + authorityString + ") questionnaire "
 				+ "join (select u_id s_id, u_name s_name from db_16.user) user using(s_id) "
 				+ orderBy;
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+		}
 		exQuestionnaireList.clear();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, qn_typeOrTag);
 			pstmt.setString(2, qn_typeOrTag);
 			ResultSet rs = pstmt.executeQuery();
-			for(int i = 0; rs.next() && i != totalCount; i++) {
+			while(rs.next()) {
 				ExDbquestionnaire exQuestionnaire = new ExDbquestionnaire();
 				exQuestionnaire.setAll(rs);
 				exQuestionnaireList.add(exQuestionnaire);
@@ -136,23 +142,23 @@ public class SearchQnDAO {
 		}
 		return message;
 	}
-	public int getExQnsByQnTitleByQnTypeOrTag(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int authority, int totalCount) {
-		return this.getExQnsByQnTitleByQnTypeOrTag(qn_title, exQuestionnaireList, authority, totalCount, "");
+	public int getExQnsByQnTitleByQnTypeOrTag(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int authority, int limit) {
+		return this.getExQnsByQnTitleByQnTypeOrTag(qn_title, exQuestionnaireList, authority, limit, "");
 	}
-	public int getAllExQnsByQnTitleByQnTypeOrTag(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int totalCount, String orderBy) {
-		return this.getExQnsByQnTitleByQnTypeOrTag(qn_title, exQuestionnaireList, ALL, totalCount, orderBy);
+	public int getAllExQnsByQnTitleByQnTypeOrTag(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit, String orderBy) {
+		return this.getExQnsByQnTitleByQnTypeOrTag(qn_title, exQuestionnaireList, ALL, limit, orderBy);
 	}
-	public int getAllExQnsByQnTitleByQnTypeOrTag(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int totalCount) {
-		return this.getAllExQnsByQnTitleByQnTypeOrTag(qn_title, exQuestionnaireList, totalCount, "");
+	public int getAllExQnsByQnTitleByQnTypeOrTag(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit) {
+		return this.getAllExQnsByQnTitleByQnTypeOrTag(qn_title, exQuestionnaireList, limit, "");
 	}
-	public int getPubExQnsByQnTitleByQnTypeOrTag(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int totalCount, String orderBy) {
-		return this.getExQnsByQnTitleByQnTypeOrTag(qn_title, exQuestionnaireList, PUBONLY, totalCount, orderBy);
+	public int getPubExQnsByQnTitleByQnTypeOrTag(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit, String orderBy) {
+		return this.getExQnsByQnTitleByQnTypeOrTag(qn_title, exQuestionnaireList, PUBONLY, limit, orderBy);
 	}
-	public int getPubExQnsByQnTitleByQnTypeOrTag(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int totalCount) {
-		return this.getPubExQnsByQnTitleByQnTypeOrTag(qn_title, exQuestionnaireList, totalCount, "");
+	public int getPubExQnsByQnTitleByQnTypeOrTag(String qn_title, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit) {
+		return this.getPubExQnsByQnTitleByQnTypeOrTag(qn_title, exQuestionnaireList, limit, "");
 	}	
 	
-	public int getExQByAStem(String q_stem, ArrayList<ExDbquestion> exQuestionList, int authority, int totalCount, String orderBy) {
+	public int getExQByAStem(String q_stem, ArrayList<ExDbquestion> exQuestionList, int authority, int limit, String orderBy) {
 		int message = EXCEPTION;
 		String authorityString = "";
 		switch(authority) {
@@ -166,18 +172,21 @@ public class SearchQnDAO {
 			break;	
 		}
 		if(!orderBy.equals("")) {
-			orderBy = "order by " + orderBy;
+			orderBy = "order by " + orderBy + " ";
 		}
 		String sql = "select * from "
 				+ "(select * from db_16.question where q_stem like ?) question "
 				+ "join (select qn_id, qn_title from db_16.questionnaire " + authorityString + " ) questionnaire using(qn_id) "
 				+ orderBy;
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+		}
 		exQuestionList.clear();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + q_stem + "%");
 			ResultSet rs = pstmt.executeQuery();
-			for(int i = 0; rs.next() && i != totalCount; i++) {
+			while(rs.next()) {
 				ExDbquestion exQuestion = new ExDbquestion();
 				exQuestion.setAll(rs);
 				exQuestionList.add(exQuestion);
@@ -197,19 +206,19 @@ public class SearchQnDAO {
 		}
 		return message;
 	}
-	public int getExQByAStem(String q_stem, ArrayList<ExDbquestion> exQuestionList, int authority, int totalCount) {
-		return this.getExQByAStem(q_stem, exQuestionList, authority, totalCount, "");
+	public int getExQByAStem(String q_stem, ArrayList<ExDbquestion> exQuestionList, int authority, int limit) {
+		return this.getExQByAStem(q_stem, exQuestionList, authority, limit, "");
 	}
-	public int getAllExQByAStem(String q_stem, ArrayList<ExDbquestion> exQuestionList, int totalCount, String orderBy) {
-		return this.getExQByAStem(q_stem, exQuestionList, ALL, totalCount, orderBy);
+	public int getAllExQByAStem(String q_stem, ArrayList<ExDbquestion> exQuestionList, int limit, String orderBy) {
+		return this.getExQByAStem(q_stem, exQuestionList, ALL, limit, orderBy);
 	}
-	public int getAllExQByAStem(String q_stem, ArrayList<ExDbquestion> exQuestionList, int totalCount) {
-		return this.getAllExQByAStem(q_stem, exQuestionList, totalCount, "");
+	public int getAllExQByAStem(String q_stem, ArrayList<ExDbquestion> exQuestionList, int limit) {
+		return this.getAllExQByAStem(q_stem, exQuestionList, limit, "");
 	}
-	public int getPubExQByAStem(String q_stem, ArrayList<ExDbquestion> exQuestionList, int totalCount, String orderBy) {
-		return this.getExQByAStem(q_stem, exQuestionList, PUBONLY, totalCount, orderBy);
+	public int getPubExQByAStem(String q_stem, ArrayList<ExDbquestion> exQuestionList, int limit, String orderBy) {
+		return this.getExQByAStem(q_stem, exQuestionList, PUBONLY, limit, orderBy);
 	}
-	public int getPubExQByAStem(String q_stem, ArrayList<ExDbquestion> exQuestionList, int totalCount) {
-		return this.getPubExQByAStem(q_stem, exQuestionList, totalCount, "");
+	public int getPubExQByAStem(String q_stem, ArrayList<ExDbquestion> exQuestionList, int limit) {
+		return this.getPubExQByAStem(q_stem, exQuestionList, limit, "");
 	}
 }

@@ -1,5 +1,9 @@
 package dao;
 
+import java.util.ArrayList;
+
+import vo.ExDbquestion;
+
 public class ATest {
 	public static void main(String args[]) {
 		//ChangePwdDAO
@@ -29,18 +33,19 @@ public class ATest {
 		
 		//NewsDAO
 		/*int result;
-		ArrayList<Dbanswer> list = new ArrayList<Dbanswer>();
-		result = DAOFactory.getNewsDAO().getAnswersByUId("guest0000", list);
+		//ArrayList<Dbanswer> list = new ArrayList<Dbanswer>();
+		//result = DAOFactory.getNewsDAO().getAnswersByUId("guest0000", list);
+		//result = DAOFactory.getNewsDAO().getFedAnswersByUId("yyf123", list, 0);
 		//ArrayList<ExDbanswer> list = new ArrayList<ExDbanswer>();
 		//result = DAOFactory.getNewsDAO().getExAnswersByUId("yyf123", list);
+		//result = DAOFactory.getNewsDAO().getFedExAnswersByUId("yyf123", list, 0);
 		//ArrayList<Dbquestionnaire> list = new ArrayList<Dbquestionnaire>();
 		//result = DAOFactory.getNewsDAO().getQuestionnairesByUId("yyf123", list);
-		//ArrayList<ExDbquestionnaire> list = new ArrayList<ExDbquestionnaire>();
-		//result = DAOFactory.getNewsDAO().getExQuestionnairesByUId("zhz123", list);
-		System.out.println(result + "\nsize:\t" + list.size());
-		for(int i = 0; i != list.size(); i++) {
-			System.out.println(list.get(0).getA_content() + list.get(0).getA_timestamp());
-		}*/
+		//result = DAOFactory.getNewsDAO().getFedQuestionnairesByUId("bty123", list, 5);
+		ArrayList<ExDbquestionnaire> list = new ArrayList<ExDbquestionnaire>();
+		result = DAOFactory.getNewsDAO().getExQuestionnairesByUId("yyf123", list);
+		//result = DAOFactory.getNewsDAO().getFedExQuestionnairesByUId("bty123", list, 0);
+		System.out.println(result + "\nsize:\t" + list.size());*/
 		
 		//RegisterDAO
 		/*int result;
@@ -63,40 +68,37 @@ public class ATest {
 		System.out.println(result);*/
 		
 		//SearchQnDAO
-		/*int result;
-		ArrayList<ExDbquestionnaire> list = new ArrayList<ExDbquestionnaire>();
-		result = DAOFactory.getSearchQnDAO().getPubExQnsByQnTitle("", list, 0, "qn_title desc");
-		//result = DAOFactory.getSearchQnDAO().getPubExQnsByQnTitleByQnTypeOrTag("ACG", list, -1, "qn_title desc");
+		int result;
+		//ArrayList<ExDbquestionnaire> list = new ArrayList<ExDbquestionnaire>();
+		//result = DAOFactory.getSearchQnDAO().getPubExQnsByQnTitle("", list, 2, "qn_title desc");
+		//result = DAOFactory.getSearchQnDAO().getPubExQnsByQnTitleByQnTypeOrTag("ACG", list, 2, "qn_title desc");
 		ArrayList<ExDbquestion> list = new ArrayList<ExDbquestion>();
-		result = DAOFactory.getSearchQnDAO().getExQByAStem("", list, 0, 0, "qn_title desc");
+		result = DAOFactory.getSearchQnDAO().getExQByAStem("", list, 0, 2, "qn_title desc");
 		System.out.println(result + "\nsize:\t" + list.size());
-		for(int i = 0; i != list.size(); i++) {
-			//System.out.println(list.get(i).getS_name() + list.get(i).getQuestionnaire().getQn_title());
-			System.out.println(list.get(i).getQn_title() + list.get(i).getQuestion().get_transQ_stem());
-		}*/
 		
 		//CreateQnDAO
-		/*int result;
-		
-		ArrayList<Dbquestionnairetype> qnTypeList = new ArrayList<Dbquestionnairetype>();
-		result = DAOFactory.getCreateQnDAO().getQnTypes(qnTypeList);
-		System.out.println(result + "\nsize:\t" + qnTypeList.size());
-		for(int i = 0; i != qnTypeList.size(); i++)
-			System.out.println(qnTypeList.get(i).getQn_type_name());
+		/*int result;		
+		//ArrayList<Dbquestionnairetype> qnTypeList = new ArrayList<Dbquestionnairetype>();
+		//result = DAOFactory.getCreateQnDAO().getQnTypes(qnTypeList);
+		//System.out.println(result + "\nsize:\t" + qnTypeList.size());
+		//for(int i = 0; i != qnTypeList.size(); i++)
+		//	System.out.println(qnTypeList.get(i).getQn_type_name());
 		
 		ExDbquestionnaire exQn = new ExDbquestionnaire();
-		exQn.getQuestionnaire().setQn_id("00000000000000000014");
+		exQn.getQuestionnaire().setQn_id("00000000000000000000");
 		exQn.getQuestionnaire().setS_id("yyf123");
 		exQn.getQuestionnaire().setQn_title("大学生读书时间调查");
 		exQn.getQuestionnaire().setQn_des("读书使人进步");
 		exQn.getQuestionnaire().setQn_type("文化");
 		exQn.getQuestionnaire().setQn_tag("ACG");
 		exQn.getQuestionnaire().setQn_authority("pri");
-		exQn.getQuestionnaire().setQn_endtime(Timestamp.valueOf("2017-12-10 03:06:15"));
+		exQn.getQuestionnaire().setQn_endtime(Timestamp.valueOf("2017-12-30 03:06:15"));
 		
-		ArrayList<Dbquestionnaire> qnList = new ArrayList<Dbquestionnaire>();
-		qnList.add(exQn.getQuestionnaire());
-		result = DAOFactory.getCreateQnDAO().createQn(qnList, 1);
+		//ArrayList<Dbquestionnaire> qnList = new ArrayList<Dbquestionnaire>();
+		//qnList.add(exQn.getQuestionnaire());
+		ArrayList<ExDbquestionnaire> exQnList = new ArrayList<ExDbquestionnaire>();
+		exQnList.add(exQn);
+		//result = DAOFactory.getCreateQnDAO().createQn(qnList, 1);
 		
 		//result = DAOFactory.getCreateQnDAO().setVCoin("yyf123", 100);
 		for(int i = 0; i != 3; i++) {
@@ -112,19 +114,19 @@ public class ATest {
 			}
 			exQn.getExQuestionList().add(exQ);
 		}
-		result = DAOFactory.getCreateQnDAO().createQsIs(exQn);
+		//result = DAOFactory.getCreateQnDAO().createQsIs(exQn);
 		
-		ArrayList<Dbown> ownList = new ArrayList<Dbown>();
+		ArrayList<Dbown> ownList = exQn.getOwnList();//new ArrayList<Dbown>();
 		for(int i = 0; i != 3; i++) {
 			Dbown own = new Dbown();
-			own.setQn_id("00000000000000000002");
+			//own.setQn_id("00000000000000000002");
 			ownList.add(own);
 		}
 		ownList.get(0).setU_id("zhz123");
 		ownList.get(1).setU_id("bty123");
 		ownList.get(2).setU_id("xyj123");
-		result = DAOFactory.getCreateQnDAO().createOwnList(ownList);
-		
+		//result = DAOFactory.getCreateQnDAO().createOwnList(ownList);
+		result = DAOFactory.getCreateQnDAO().createQnAll(exQnList);
 		System.out.println(result + "\t" + exQn.getQuestionnaire().get_transQn_id());*/
 		
 		//AnswerQnDAO
