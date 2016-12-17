@@ -187,7 +187,7 @@ div.search-user input{
 }
 */
 
-/****************************This is for the searchUser.html*************************/
+/****************************This is for the searchUser.jsp*************************/
 .cf:before, .cf:after {
     content: "";
     display: table;
@@ -205,8 +205,10 @@ div.search-user input{
 .form-wrapper {
     width: 550px;
     padding: 15px;
+    margin-left: 11%;
     background-color: rgba(240, 240, 240, 0.4);
     border-radius: 10px;
+    margin-bottom: 40px;
 }
 
 /* Form text input */

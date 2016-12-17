@@ -1,3 +1,7 @@
+<%@ page import="vo.Dbuser" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -126,7 +130,7 @@
     <!-- END：登陆模态框 -->
 
     <!-- 页面主要内容 -->
-    <div id="main" class="container">
+    <div  id="main" class="container">
         <div class="row">
             <!-- 功能side bar -->
             <div class="col-md-offset-1 col-md-2" id="side">
@@ -166,15 +170,30 @@
             <!-- END：功能side bar -->
 
             <!-- 页面的主要内容 -->
-            <div id="news-content" class="col-md-offset-1 col-md-8">
+            <div id="search-content" class="col-md-offset-1 col-md-8">
                 <div class="content">
-                    <div class="panel panel-success">
+                    <form class="cf form-wrapper">
+                        <input type="text" name="name" placeholder="搜索平台用户..." required>
+                        <button type="submit">Search</button>
+                    </form>
+                    <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title">昨天</h3>
+                            <h3 class="panel-title">尹帝关注的人</h3>
                         </div>
-                        <div class="panel-body">
-                            尹帝在平台上发布了一个公共问卷《对于私人信息暴露在网络的看法》
-                        </div>
+                        <ul class="list-group">
+                        <%
+                            for(Dbuser user : (ArrayList<Dbuser>)request.getAttribute("userList")) {
+                        %>
+                        <li class="list-group-item">
+                            <%=user.getU_name()%>
+                            <button type="button" aria-hidden="true" class="close"><span
+                                    class="glyphicon glyphicon-plus"></span>FOLLOW
+                            </button>
+                        </li>
+                        <%
+                            }
+                        %>
+                    </ul>
                     </div>
                 </div>
             </div>

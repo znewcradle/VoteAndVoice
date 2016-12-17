@@ -1,3 +1,9 @@
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="vo.ExDbanswer" %>
+<%@ page import="vo.ExDbquestionnaire" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +19,7 @@
     <!-- self-defined main css file -->
     <link rel="stylesheet" href="style/style.css"/>
     <!-- self-defined user-template css file -->
-    <link rel="stylesheet" href="style/user.css" />
+    <link rel="stylesheet" href="style/user.css"/>
 </head>
 <body>
 <div class="box-wrap">
@@ -126,12 +132,12 @@
     <!-- END：登陆模态框 -->
 
     <!-- 页面主要内容 -->
-    <div  id="main" class="container">
+    <div id="main" class="container">
         <div class="row">
             <!-- 功能side bar -->
             <div class="col-md-offset-1 col-md-2" id="side">
                 <div id="profie">
-                    <img src="images/git.jpg" class="img-rounded"  alt="avatar" width="80" height="80"/>
+                    <img src="images/git.jpg" class="img-rounded" alt="avatar" width="80" height="80"/>
                     <div id="user-name">
                         <span>尹天王</span>
                     </div>
@@ -147,7 +153,7 @@
                         <label>我的问卷</label>
                     </div>
                     <div class="user-button" id="safe">
-                        <input type="checkbox" >
+                        <input type="checkbox">
                         <label>安全设置</label>
                     </div>
                     <div class="user-button dropdown" id="friend">
@@ -166,12 +172,63 @@
             <!-- END：功能side bar -->
 
             <!-- 页面的主要内容 -->
-            <div id="search-content" class="col-md-offset-1 col-md-8">
+            <div id="news-content" class="col-md-offset-1 col-md-8">
                 <div class="content">
-                    <form class="cf form-wrapper">
-                        <input type="text" placeholder="搜索平台用户..." required>
-                        <button type="submit">Search</button>
-                    </form>
+                    <%
+                        String today = (String) request.getAttribute("today");
+                        String yesterday = (String) request.getAttribute("yesterday");
+                        List<String> dateList = (List<String>) request.getAttribute("dateList");
+                        List<ArrayList<Object>> newsList = (List<ArrayList<Object>>) request.getAttribute("newsList");
+                        for (int i = 0; i < dateList.size(); i++) {
+                            if (newsList.get(i).size() == 0) {
+                                continue;
+                            }
+                    %>
+
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <%
+                                if (today.equals(dateList.get(i))) {
+                            %>
+                            <h3 class="panel-title">今天</h3>
+                            <%
+                            } else if (yesterday.equals(dateList.get(i))) {
+                            %>
+                            <h3 class="panel-title">昨天</h3>
+                            <%
+                            } else {
+                            %>
+                            <h3 class="panel-title"><%=dateList.get(i)%>
+                            </h3>
+                            <%
+                                }
+                            %>
+                        </div>
+                        <%
+                            for (Object news : newsList.get(i)) {
+                                String show;
+                                if (news instanceof ExDbanswer) {
+                                    ExDbanswer answer = (ExDbanswer) news;
+                                    show = answer.getU_name() + "在平台上完成了《" + answer.getQn_title() + "》问卷";
+                                } else if (news instanceof ExDbquestionnaire) {
+                                    ExDbquestionnaire questionnaire = (ExDbquestionnaire) news;
+                                    show = questionnaire.getS_name() + "在平台上发布了" +
+                                            questionnaire.getQuestionnaire().get_transQn_authority() + "问卷《" +
+                                            questionnaire.getQuestionnaire().get_transQn_title() + "》";
+                                } else {
+                                    continue;
+                                }
+                        %>
+                        <div class="panel-body">
+                            <%=show%>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                    <%
+                        }
+                    %>
                 </div>
             </div>
             <!-- END: 页面的主要内容 -->
