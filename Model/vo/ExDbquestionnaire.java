@@ -8,7 +8,8 @@ public class ExDbquestionnaire {
 	private Dbquestionnaire questionnaire = new Dbquestionnaire();
 	private String s_name = "";
 	private ArrayList<ExDbquestion> exQuestionList = null;
-	
+	private ArrayList<Dbown> ownList = null;
+	private long qn_cost = 0;
 	//no translation
 	
 	public Dbquestionnaire getQuestionnaire() {
@@ -42,6 +43,18 @@ public class ExDbquestionnaire {
 		}
 		return exQuestionList;
 	}
+	public ArrayList<Dbown> getOwnList() {
+		if(ownList == null) {
+			ownList = new ArrayList<Dbown>();
+		}
+		return ownList;
+	}
+	public long getQn_cost() {
+		return qn_cost;
+	}
+	public void setQn_cost(long qn_cost) {
+		this.qn_cost = qn_cost;
+	}
 	
 	//translation
 	public Dbquestionnaire get_transQuestionnaire() {
@@ -55,5 +68,14 @@ public class ExDbquestionnaire {
 	}
 	public ArrayList<ExDbquestion> get_transExQuestionList() {
 		return getExQuestionList();
+	}
+	public ArrayList<Dbown> get_transOwnList() {
+		return getOwnList();
+	}
+	public long get_transQn_cost() {
+		return qn_cost;
+	}
+	public void set_transQn_cost(long qn_cost) {
+		this.qn_cost = qn_cost;
 	}
 }

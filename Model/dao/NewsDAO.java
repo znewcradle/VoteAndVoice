@@ -18,7 +18,7 @@ public class NewsDAO {
 	
 	static public final int SUCCESS = 1;
 	static public final int EXCEPTION = -1;
-
+	static public final int DEFAULT_LIMIT = 100;
 	public NewsDAO() {
 		try {
 			dbconn = new DatabaseConnection();
@@ -29,13 +29,15 @@ public class NewsDAO {
 		conn = dbconn.getConnection();
 	}
 	
-	public int getQuestionnairesByUId(String s_id, ArrayList<Dbquestionnaire> questionnaireList) {
+	public int getQuestionnairesByUId(String s_id, ArrayList<Dbquestionnaire> questionnaireList, int limit) {
 		int message = EXCEPTION;
 		String sql = "select * "
 				+ "from db_16.questionnaire "
 				+ "where s_id=? "
 				+ "order by qn_starttime desc ";
-		questionnaireList.clear();
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+		}
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, s_id);
@@ -60,14 +62,19 @@ public class NewsDAO {
 		}
 		return message;
 	}
+	public int getQuestionnairesByUId(String s_id, ArrayList<Dbquestionnaire> questionnaireList) {
+		return getQuestionnairesByUId(s_id, questionnaireList, DEFAULT_LIMIT);
+	}
 	
-	public int getExQuestionnairesByUId(String s_id, ArrayList<ExDbquestionnaire> exQuestionnaireList) {
+	public int getExQuestionnairesByUId(String s_id, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit) {
 		int message = EXCEPTION;
 		String sql = "select * from "
 				+ "(select * from db_16.questionnaire where s_id=?) questionnaire "
 				+ "join (select u_id s_id, u_name s_name from db_16.user) user using(s_id) "
 				+ "order by qn_starttime desc ";
-		System.out.println(sql);
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+		}
 		exQuestionnaireList.clear();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -93,14 +100,19 @@ public class NewsDAO {
 		}
 		return message;
 	}
+	public int getExQuestionnairesByUId(String s_id, ArrayList<ExDbquestionnaire> exQuestionnaireList) {
+		return getExQuestionnairesByUId(s_id, exQuestionnaireList, DEFAULT_LIMIT);
+	}
 	
-	public int getAnswersByUId(String u_id, ArrayList<Dbanswer> answerList) {
+	public int getAnswersByUId(String u_id, ArrayList<Dbanswer> answerList, int limit) {
 		int message = EXCEPTION;
 		String sql = "select * "
 				+ "from db_16.answer "
 				+ "where u_id=? "
 				+ "order by a_timestamp desc ";
-		System.out.println(sql);
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+		}
 		answerList.clear();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -126,17 +138,22 @@ public class NewsDAO {
 		}
 		return message;
 	}
+	public int getAnswersByUId(String u_id, ArrayList<Dbanswer> answerList) {
+		return getAnswersByUId(u_id, answerList, DEFAULT_LIMIT);
+	}
 	
-	public int getExAnswersByUId(String u_id, ArrayList<ExDbanswer> exAnswerList) {
+	public int getExAnswersByUId(String u_id, ArrayList<ExDbanswer> exAnswerList, int limit) {
 		int message = EXCEPTION;
 		String sql = "select * from "
 				+ "(select * from db_16.answer where u_id=?) answer "
 				+ "join (select u_id, u_name from db_16.user) user using(u_id)"
 				+ "join (select qn_id, qn_title from db_16.questionnaire) questionnaire using(qn_id) "
-				+ "join (select q_id, q_stem from db_16.question) question using(q_id) "
-				+ "join (select i_id, i_des from db_16.item) item using(i_id) "
+				+ "join (select qn_id, q_id, q_stem from db_16.question) question using(qn_id, q_id) "
+				+ "join (select qn_id, q_id, i_id, i_des from db_16.item) item using(qn_id, q_id, i_id) "
 				+ "order by a_timestamp desc ";
-		System.out.println(sql);
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+		}
 		exAnswerList.clear();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -161,5 +178,163 @@ public class NewsDAO {
 			}
 		}
 		return message;
+	}
+	public int getExAnswersByUId(String u_id, ArrayList<ExDbanswer> exAnswerList) {
+		return getExAnswersByUId(u_id, exAnswerList, DEFAULT_LIMIT);
+	}
+	
+	public int getFedQuestionnairesByUId(String following_u_id, ArrayList<Dbquestionnaire> questionnaireList, int limit) {
+		int message = EXCEPTION;
+		String sql = "select * "
+				+ "from db_16.questionnaire "
+				+ "where s_id in (select followed_u_id from db_16.follow where following_u_id=? ) "
+				+ "order by qn_starttime desc ";
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+		}
+		questionnaireList.clear();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, following_u_id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Dbquestionnaire questionnaire = new Dbquestionnaire();
+				questionnaire.setAll(rs);
+				questionnaireList.add(questionnaire);
+			}
+			message = SUCCESS;
+		} catch (SQLException e) {
+			message = EXCEPTION;
+			System.out.println("MySQL fault.");
+			e.printStackTrace();
+		} finally {
+			try {
+				dbconn.close();
+			} catch (Exception e) {
+				message = EXCEPTION;
+				e.printStackTrace();
+			}
+		}
+		return message;
+	}
+	public int getFedQuestionnairesByUId(String following_u_id, ArrayList<Dbquestionnaire> questionnaireList) {
+		return getFedQuestionnairesByUId(following_u_id, questionnaireList, DEFAULT_LIMIT);
+	}
+	
+	public int getFedExQuestionnairesByUId(String following_u_id, ArrayList<ExDbquestionnaire> exQuestionnaireList, int limit) {
+		int message = EXCEPTION;
+		String sql = "select * from "
+				+ "(select * from db_16.questionnaire where s_id in (select followed_u_id from db_16.follow where following_u_id=? ) ) questionnaire "
+				+ "join (select u_id s_id, u_name s_name from db_16.user) user using(s_id) "
+				+ "order by qn_starttime desc ";
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+		}
+		exQuestionnaireList.clear();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, following_u_id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ExDbquestionnaire exQuestionnaire = new ExDbquestionnaire();
+				exQuestionnaire.setAll(rs);
+				exQuestionnaireList.add(exQuestionnaire);
+			}
+			message = SUCCESS;
+		} catch (SQLException e) {
+			message = EXCEPTION;
+			System.out.println("MySQL fault.");
+			e.printStackTrace();
+		} finally {
+			try {
+				dbconn.close();
+			} catch (Exception e) {
+				message = EXCEPTION;
+				e.printStackTrace();
+			}
+		}
+		return message;
+	}
+	public int getFedExQuestionnairesByUId(String following_u_id, ArrayList<ExDbquestionnaire> exQuestionnaireList) {
+		return getFedExQuestionnairesByUId(following_u_id, exQuestionnaireList, DEFAULT_LIMIT);
+	}
+	
+	public int getFedAnswersByUId(String following_u_id, ArrayList<Dbanswer> answerList, int limit) {
+		int message = EXCEPTION;
+		String sql = "select * "
+				+ "from db_16.answer "
+				+ "where u_id in (select followed_u_id from db_16.follow where following_u_id=? ) "
+				+ "order by a_timestamp desc ";
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+		}
+		answerList.clear();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, following_u_id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Dbanswer answer = new Dbanswer();
+				answer.setAll(rs);
+				answerList.add(answer);
+			}
+			message = SUCCESS;
+		} catch (SQLException e) {
+			message = EXCEPTION;
+			System.out.println("MySQL fault.");
+			e.printStackTrace();
+		} finally {
+			try {
+				dbconn.close();
+			} catch (Exception e) {
+				message = EXCEPTION;
+				e.printStackTrace();
+			}
+		}
+		return message;
+	}
+	public int getFedAnswersByUId(String following_u_id, ArrayList<Dbanswer> answerList) {
+		return getFedAnswersByUId(following_u_id, answerList, DEFAULT_LIMIT);
+	}
+	
+	public int getFedExAnswersByUId(String following_u_id, ArrayList<ExDbanswer> exAnswerList, int limit) {
+		int message = EXCEPTION;
+		String sql = "select * from "
+				+ "(select * from db_16.answer where u_id in (select followed_u_id from db_16.follow where following_u_id=? ) ) answer "
+				+ "join (select u_id, u_name from db_16.user) user using(u_id)"
+				+ "join (select qn_id, qn_title from db_16.questionnaire) questionnaire using(qn_id) "
+				+ "join (select qn_id, q_id, q_stem from db_16.question) question using(qn_id, q_id) "
+				+ "join (select qn_id, q_id, i_id, i_des from db_16.item) item using(qn_id, q_id, i_id) "
+				+ "order by a_timestamp desc ";
+		if(limit > 0) {
+			sql += "limit " + Integer.toString(limit) + " ";
+		}
+		exAnswerList.clear();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, following_u_id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				ExDbanswer exAnswer = new ExDbanswer();
+				exAnswer.setAll(rs);
+				exAnswerList.add(exAnswer);
+			}
+			message = SUCCESS;
+		} catch (SQLException e) {
+			message = EXCEPTION;
+			System.out.println("MySQL fault.");
+			e.printStackTrace();
+		} finally {
+			try {
+				dbconn.close();
+			} catch (Exception e) {
+				message = EXCEPTION;
+				e.printStackTrace();
+			}
+		}
+		return message;
+	}
+	public int getFedExAnswersByUId(String following_u_id, ArrayList<ExDbanswer> exAnswerList) {
+		return getFedExAnswersByUId(following_u_id, exAnswerList, DEFAULT_LIMIT);
 	}
 }
