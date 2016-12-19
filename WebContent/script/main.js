@@ -179,26 +179,13 @@
     // Document on load.
 	$(function(){
 
-		// parallax();
-
-		// burgerMenu();
-
-		// clickMenu();
-
-		// windowScroll();
-
-		// navigationSection();
-
-		// goToTop();
-
-
-		// Animations
 		contentWayPoint();
 
 	});
 
 
 }());
+/****************************基础函数*******************************/
 function addLoadEvent(func) {
     var oldonload = window.onload;
     if (typeof window.onload != 'function') {
@@ -257,6 +244,7 @@ function editUserInfo(type)
         btn.setAttribute("class", "btn btn-success");
         btn.onclick = function(){
             editUserInfo(false);
+            location.href += "confirm";   
         }
     }
     else{
@@ -272,6 +260,7 @@ var is_click = false;
 var is_a_click = false;
 var txtNode;
 var tagdiv;
+//选择类型
 function onClickType(btn) {
     if(btn.is_click == "false" && is_click == false){
         //改变button的样式
@@ -284,21 +273,25 @@ function onClickType(btn) {
         question.appendChild(txtNode);
 
         tagdiv = document.createElement("form");
+        tagdiv.setAttribute("action", "CreateQuestionnaire_authority");///
+        tagdiv.setAttribute("method", "post");///
+        var type = document.createElement("input");///
+        type.setAttribute("type", "hidden");///
+        type.setAttribute("name", "type");///
+        type.setAttribute("value", btn.innerText);///
         var tag = document.createElement("input");
         tag.setAttribute("placeholder", "为您的问卷添加一个tag，说明其内容吧^_^");
         tag.setAttribute("class", "tag");
+        tag.setAttribute("name", "tag");///
         var submit = document.createElement("button");
         submit.setAttribute("class", "btn btn-success");
         submit.setAttribute("id", "tag-btn");
+        submit.setAttribute("type", "submit");///
         submit.appendChild(document.createTextNode("提交"));
+        tagdiv.appendChild(type);///
         tagdiv.appendChild(tag);
         tagdiv.appendChild(submit);
         insertAfter(tagdiv, question);
-        //增加链接
-        var first_link = document.getElementsByClassName("first-link");
-        for(var i = 0;i < first_link.length; ++ i){
-            first_link[i].setAttribute("href", "creatingQuestionnaire2.html");
-        }
     }
     else if(is_click == true && btn.is_click == "true"){
         btn.is_click = "false";
@@ -315,28 +308,7 @@ function onClickType(btn) {
         }
     }
 }
-function onClickAuthority(btn){
-    if(btn.is_click == "false" && is_a_click == false){
-        btn.is_click = "true";
-        is_a_click = true;
-        var question = document.getElementById("type-title");
-        txtNode = document.createTextNode(btn.innerText);
-        question.appendChild(txtNode);
 
-        var nextLink = document.getElementsByClassName("second-link");
-        var ltxt = "creatingQuestionnaire5.html";
-        if(btn.innerText == "私有") ltxt = "creatingQuestionnaire3.html";
-        for(var i = 0; i < nextLink.length; ++ i){
-            nextLink[i].setAttribute("href", ltxt);
-        }
-    }
-    else if(is_a_click == true && btn.is_click == "true"){
-        btn.is_click = "false";
-        is_a_click = false;
-        var question = document.getElementById("type-title");
-        question.removeChild(txtNode);
-    }
-}
 function prepareClickType(){
     if(document.getElementsByClassName("qtype") == null) return;
     var qtype = document.getElementsByClassName("qtype");
@@ -355,6 +327,24 @@ function prepareClickType(){
             onClickType(this);
         };
         links[i].onkeypress = links[i].onclick;
+    }
+}
+//选择权限
+function onClickAuthority(btn){
+    if(btn.is_click == "false" && is_a_click == false){
+        btn.is_click = "true";
+        is_a_click = true;
+        var question = document.getElementById("type-title");
+        txtNode = document.createTextNode(btn.innerText);
+        question.appendChild(txtNode);
+        document.getElementById("form-authority").setAttribute("value", btn.innerText);///
+    }
+    else if(is_a_click == true && btn.is_click == "true"){
+        btn.is_click = "false";
+        is_a_click = false;
+        var question = document.getElementById("type-title");
+        question.removeChild(txtNode);
+        document.getElementById("form-authority").setAttribute("value", "");///
     }
 }
 function prepareClickAuthority(){
@@ -384,6 +374,39 @@ function prepareClickAdd(){
         }
     }
 }
+addLoadEvent(prepareClickAuthority);
+addLoadEvent(prepareClickType);
+/*************************creatingQuestionnaire4.html****************************************/
+var cpeople = [];
+function assignJson(name, is_add){
+    var chose = document.getElementById("people_chose");
+    if(is_add == true){
+        cpeople.push(name);
+    }
+    else{
+        var i = 0;
+        var temp = [];
+        for( ;i < cpeople.length; ++ i) {
+            if (cpeople[i] == name) {
+                break;
+            }
+            else temp[i] = cpeople[i];
+        }
+        for(;i < cpeople.length - 1; ++ i){
+            temp[i] = cpeople[i + 1];
+        }
+        cpeople = temp;
+    }
+    var arrString = "[";
+    for(var i = 0; i < cpeople.length; ++ i){
+        if(i != cpeople.length - 1) arrString += '"' + cpeople[i] + '"' +  ",";
+        else arrString += '"' + cpeople[i] + '"';
+    }
+    arrString += "]";
+    var jsonString = arrString;//JSON.stringify(arrString);
+    alert(jsonString);
+    chose.value = jsonString;
+}
 function onClickAdd(btn){
     //开头进行判断
     if(btn.is_click == "true") return;
@@ -395,11 +418,13 @@ function onClickAdd(btn){
 
     txt = txt.substring(0, txt.length - 4);
     var txtNode = document.createTextNode(txt);
+    assignJson(txt, true);
 
     chose.setAttribute("class", "btn btn-default chose");
     chose.appendChild(txtNode);
     chose.onclick = function(){
-        chose.is_click = "false";
+        assignJson(txt, false);
+        btn.is_click = "false";
         onClickChose(this);
     }
     insertAfter(chose, pdiv.lastElementChild);
@@ -409,8 +434,6 @@ function onClickChose(btn){
     pdiv.removeChild(btn);
 }
 addLoadEvent(prepareClickAdd);
-addLoadEvent(prepareClickAuthority);
-addLoadEvent(prepareClickType);
 
 /*************************constructingQuestionnaire.html**************************************/
 //让sidebar随着滚动条一起滚动

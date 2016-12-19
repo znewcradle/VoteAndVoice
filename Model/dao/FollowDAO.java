@@ -129,6 +129,38 @@ public class FollowDAO {
 		return message;
 	}
 
+	public int getAllFollowedUser(String u_id, ArrayList<Dbuser> friendsList) {
+		int message = EXCEPTION;
+		String sql = "select * "
+				+ "from db_16.user "
+				+ "where u_id in (select followed_u_id "
+				+ " from db_16.follow "
+				+ " where following_u_id=? ) ";
+		System.out.println(sql);
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, u_id);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Dbuser user = new Dbuser();
+				user.setAll(rs);
+				friendsList.add(user);
+			}
+			message = SUCCESS;
+		} catch (SQLException e) {
+			message = EXCEPTION;
+			e.printStackTrace();
+		} finally {
+			try {
+				dbconn.close();
+			} catch (Exception e) {
+				message = EXCEPTION;
+				e.printStackTrace();
+			}
+		}
+		return message;
+	}
+	
 	public int follow(String following_u_id, String followed_u_id) {
 		int message = EXCEPTION;
 		String sqlTest = "select count(*) from db_16.follow "
