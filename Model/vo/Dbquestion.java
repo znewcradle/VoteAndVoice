@@ -66,8 +66,8 @@ public class Dbquestion {
 	public void setAll(ResultSet rs) throws SQLException{
 		try {
 			this.setQn_id(rs.getString("qn_id"));
-			this.setQn_id("qn_id");
-			this.setQ_type("q_type");
+			this.setQn_id(rs.getString("qn_id"));
+			this.setQ_type(rs.getString("q_type"));
 			this.setQ_stem(rs.getString("q_stem"));
 			this.setQ_des(rs.getString("q_des"));
 			this.setQ_i_count(rs.getBigDecimal("q_i_count"));
