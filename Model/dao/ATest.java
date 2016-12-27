@@ -73,7 +73,7 @@ public class ATest {
 		//result = DAOFactory.getSearchQnDAO().getPubExQnsByQnTitle("", list, 2, "qn_title desc");
 		//result = DAOFactory.getSearchQnDAO().getPubExQnsByQnTitleByQnTypeOrTag("ACG", list, 2, "qn_title desc");
 		ArrayList<ExDbquestion> list = new ArrayList<ExDbquestion>();
-		result = DAOFactory.getSearchQnDAO().getExQByAStem("", list, 0, 2, "qn_title desc");
+		result = DAOFactory.getSearchQnDAO().getExQByAStem("", list, "pub", 0, null, "sin", null);
 		System.out.println(result + "\nsize:\t" + list.size());
 		
 		//CreateQnDAO
