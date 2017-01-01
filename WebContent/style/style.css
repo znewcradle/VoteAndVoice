@@ -499,3 +499,62 @@ footer .social {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+/********************This is for the index page**********************************************/
+span.errorMessage{
+    color: red;
+    font-size: small;
+    display:inline-block;
+}
+span.successMessage{
+	color: green;
+	font-size: small;
+	display: inline-block;
+}
+div.modal-content h4{
+    display:inline-block;
+    margin-right: 10%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

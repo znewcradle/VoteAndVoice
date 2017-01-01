@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import vo.Dbuser;
 import vo.ExDbquestionnaire;
 
 /**
@@ -31,8 +32,11 @@ public class CreateQuestionnaire0Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		session.setAttribute("u_id", "yyf123");//////////////////记得注释掉
-		String u_id = (String) session.getAttribute("u_id");
+		Dbuser usr = new Dbuser();//////////////////记得注释掉
+		usr.set_transU_id("yyf123");//////////////////记得注释掉
+		session.setAttribute("loginUser", usr);//////////////////记得注释掉
+		Dbuser loginUser = (Dbuser) session.getAttribute("loginUser");
+		String u_id = loginUser.get_transU_id();
 		if(u_id!=null) {
 			ExDbquestionnaire newExQn = new ExDbquestionnaire();
 			newExQn.get_transQuestionnaire().set_transS_id(u_id);

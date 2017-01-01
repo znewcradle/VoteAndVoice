@@ -1,5 +1,6 @@
-/* search.html的样式 */
+/* searchQuestion.html的样式 */
 .search {
+    margin-top: 3%;
     width: 80%;
     margin-left: 10%;
     margin-bottom: 20px;
@@ -76,7 +77,7 @@
 }
 
 .search .select_pop a:hover {
-    background: #40B50E;
+    background-color: rgba(20, 200, 20, 0.3);
     color: #fff;
 }
 
@@ -208,7 +209,7 @@
 }
 .link-font{
     font-size: 0.8em;
-    color: #007ead;
+    color: #111111;
 }
 .event-img{
 	overflow:hidden;
@@ -257,54 +258,39 @@
     max-width: 100%;
     height: auto;
 }
-
-ul.meta-post{
-	padding:0;
-	margin:0 0 1em 0;
-	list-style:none;
-	position:relative;
+/**************************for the search dropdown menu*******************/
+div.select-box form{
+    margin-bottom: 30%;
 }
-
-.courses_box1-left {
-    background-color: #f2f4f5;
-    margin: 0 auto;
-    padding: 20px 20px 30px;
-    border-radius: 3px;
+div.select-block{
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(240, 240, 240, 0.5);
+    border-radius: 6%;
 }
-
-.select-block1 select {
-    box-shadow: none;
-    border: 1px solid #e2e2e3;
-    outline: 0;
-    background: #ffffff;
-    height: 44px;
-    line-height: 32px;
-    padding: 5px 15px;
-    width: 80%;
-    margin-bottom: 6px;
-    color: #a7aebf;
-    border-radius: 5px;
-}
-
-.select-block1 select option{
-    font-size: 14px;
-}
-
-.course-submit {
-    width: 130px;
-    height: 50px;
-    border: none;
-    background-color: #f1b458;
-    color: #ffffff;
-    line-height: 44px;
-    padding: 0 30px;
-    font-size: 20px;
-    text-transform: uppercase;
-    border-radius:5px;
+div.select-block select{
+    width: 100%;
     display: inline-block;
-    margin-top: 20px;
-    margin-left: 40%;
-    outline: none;
+}
+span.select-title{
+    font-weight: bold;
+    display: inline-block;
+    color: #1ABC9C;
+    opacity: 0.9;
+}
+div.select-block select option{
+    font-size: smaller;
+    background-color: transparent!important;
+}
+div.select-block option:nth-child(2n){
+    background-color: rgba(40, 230, 20, 0.1)!important;
+}
+div.select-block option:hover{
+    font-weight: bolder!important;
+}
+div.select-box button:hover{
+    color: #1ABC9C;
+    background-color: white;
 }
 /* 分页 */
 a {
@@ -399,22 +385,7 @@ a {
     color: #fff!important;
 }
 
-/* 功能栏样式 */
-#function-list{
-    padding: 0;
-    margin-left: 25%;
-    font-family: 'Lato', sans-serif;
-    box-sizing: border-box;
-    display:inline-block;
-}
-.function-list{
-    margin-left: 25%;
-    box-sizing: border-box;
-    display:inline-block;
-}
-.function-list h4 a{
-    color: #333333;
-}
+
 /* 这是user.html的样式 */
 
 img.img-rounded {
@@ -435,23 +406,30 @@ div#user-name span{
 
 a.dropdown-toggle:link,a.dropdown-toggle:hover, a.dropdown-toggle:visited, a.dropdown-toggle:active{
     text-decoration: none;
-    text-color: black;
+    color: black;
 }
 
-#function-list{
+#type-list{
+    margin-left: 10%;
     padding: 0;
-    margin-left: 25%;
     font-family: 'Lato', sans-serif;
     box-sizing: border-box;
     display:inline-block;
 }
-.function-list{
-    margin-left: 25%;
-    box-sizing: border-box;
-    display:inline-block;
+div#type-list div.type-group div.user-button{
+    margin-bottom: 10%;
 }
-.function-list h4 a{
+div.type-header{
+    margin-left: 10%;
+    display: block;
+    box-sizing: border-box;
+}
+div.type-header h4 a{
+    font-size: larger;
     color: #333333;
+}
+div.type-group{
+    display: inline-block;
 }
 .dropdown ul{
     padding: 0;
@@ -468,29 +446,29 @@ a.dropdown-toggle:link,a.dropdown-toggle:hover, a.dropdown-toggle:visited, a.dro
     opacity: 0.7;
     padding: 15px 20px;
 }
-#basic label:hover, #basic label, #basic input{
+div.type1 label:hover, div.type1 label, div.type1 input{
     color: #03a9f4;
     border-left: 4px solid #03a9f4;
 }
-#questionnaire label:hover, #questionnaire label, #questionnaire input{
+div.type2 label:hover, div.type2 label, div.type2 input{
     color: #ffc107;
     border-left: 4px solid #ffc107;
 }
-#safe label:hover, #safe label, #safe input{
+div.type3 label:hover, div.type3 label, div.type3 input{
     color: #ff8888;
     border-left: 4px solid #ff8888;
 }
-#basic label:hover
+div.type1 label:hover
 {
     background: #03a9f4;
     color:white;
 }
-#questionnaire label:hover
+div.type2 label:hover
 {
     background:#ffc107;
     color:white;
 }
-#safe label:hover
+div.type3 label:hover
 {
     background: #ff8888;
     color:white;
@@ -552,7 +530,7 @@ p button {
     width: 150px;
 }
 
-/* questionlist.html的样式 */
+/* searchQuestion.html的样式 */
 div.question-list h2 a{
     color: #204d74;
     margin-left: 60px;

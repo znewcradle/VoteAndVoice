@@ -2,14 +2,24 @@
     pageEncoding="utf-8"%>
 <%@page import="java.util.*, vo.*, dao.*" %>
 <%!
-String current_u_id = "yyf123";
+String current_u_id = null;
 Dbuser current_user = new Dbuser();
 %>
 <%
+session = request.getSession(true);
+Dbuser loginUser = (Dbuser) session.getAttribute("loginUser");
+if(loginUser != null) {
+	current_u_id = loginUser.get_transU_id();
+}
+if(current_u_id == null) {
+	response.getWriter().append("have not logined");
+	return;
+}
 ArrayList<Dbuser> userList = new ArrayList<Dbuser>();
 int message = DAOFactory.getUserInfoDAO().getUserInfo(current_u_id, userList);
 if(message < 0) {
-	response.getWriter().append("各种失败");
+	response.getWriter().append("mysql exception");
+	return;
 }
 else {
 	current_user = userList.get(0);
