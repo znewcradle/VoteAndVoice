@@ -2,14 +2,24 @@
     pageEncoding="utf-8"%>
 <%@page import="java.util.*, vo.*, dao.*" %>
 <%!
-String current_u_id = "yyf123";
+String current_u_id = null;
 ArrayList<Dbuser> followed_users = new ArrayList<Dbuser>();
 %>
 <%
+session = request.getSession(true);
+Dbuser loginUser = (Dbuser) session.getAttribute("loginUser");
+if(loginUser != null) {
+	current_u_id = loginUser.get_transU_id();
+}
+if(current_u_id == null) {
+	response.getWriter().append("have not logined");
+	return;
+}
 followed_users.clear();
 int message = DAOFactory.getFollowDAO().getAllFollowedUser(current_u_id, followed_users);
 if(message < 0) {
-	response.getWriter().append("各种失败");
+	response.getWriter().append("mysql exception");
+	return;
 }
 else {
 %>

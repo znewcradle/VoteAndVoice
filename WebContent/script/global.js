@@ -49,14 +49,46 @@ $(function(){
 
 });
 
-function check(){
-    if($("#stype").val()=="zz"){
-        $("#searchform").attr("action","/search.php");
-    }
-    else if($("#stype").val()=="mb"){
-        $("#searchform").attr("action","/search_mj.php");
-    }
-    else if($("#stype").val()=="jc"){
-        $("#searchform").attr("action","/search_jc.php");
+
+function prepareSearchType(){
+    var list = document.getElementsByClassName("user-button");
+    if(list == null) return;
+    for(var i  = 0; i < list.length; ++ i){
+        list[i].onclick = function(){
+            submitType(this);
+        }
     }
 }
+addLoadEvent(prepareSearchType);
+function submitType(btn){
+    var label = btn.getElementsByTagName("label")[0];
+    if(label == null) return;
+    label = label.innerText;
+
+    var keyType = document.getElementById("keyType");
+    var typeClick = document.getElementById("typeClick");
+
+    keyType.value = label;
+    typeClick.onclick();
+}
+
+/******************************This is for the searchQuestionnaire*************************************************/
+function getChosenValue(){
+	var selist = document.getElementsByTagName("select");
+	if(selist == null) return;
+	document.getElementById("orderby").value = selist[0].value;
+	document.getElementById("totalNum").value = selist[1].value;
+	document.getElementById("qType").value = selist[2].value;
+	document.getElementById("collectNum").value = selist[3].value;
+}
+
+function getQChosenValue(){
+	var selist = document.getElementsByTagName("select");
+	if(selist == null) return;
+	document.getElementById("questionType").value  = selist[0].value;
+	document.getElementById("questionnaireType").value = selist[1].value;
+}
+
+
+
+
